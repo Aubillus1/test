@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <RadialGradientBrush x:Key="Background" RadiusX="0.88" RadiusY="0.88" GradientOrigin="1,0" SpreadMethod="Pad">
+        <GradientStop Color="#B8D6FF" Offset="0.0"/>
+        <GradientStop Color="#FFFFFF" Offset="1"/>
+    </RadialGradientBrush>
+    <SolidColorBrush Color="#8A8A8A" x:Key="BorderColor1"/>
+    <SolidColorBrush Color="Black" x:Key="BorderColor2"/>
+
+
+    <SolidColorBrush Color="White" x:Key="ButtonColor1"/>
+    <SolidColorBrush Color="#8A8A8A" x:Key="ButtonColor2"/>
+    <SolidColorBrush Color="Black" x:Key="ButtonColor3"/>
+
+    <SolidColorBrush Color="DodgerBlue" x:Key="ButtonColorPressed1"/>
+
+    <SolidColorBrush Color="White" x:Key="BackgroundControlColor1"/>
+    <SolidColorBrush Color="Black" x:Key="BackgroundControlColor2"/>
+    <SolidColorBrush Color="#8A8A8A" x:Key="BackgroundControlColor3"/>
+
+    <SolidColorBrush Color="Black" x:Key="Text1"/>
+    <SolidColorBrush Color="#8A8A8A" x:Key="Text2"/>
+    <SolidColorBrush Color="White" x:Key="Text3"/>
+
+    <SolidColorBrush Color="#454EFF" x:Key="EtiquetaColor"/>
+
+    <SolidColorBrush Color="#0098FF" x:Key="BarraCargaColor1"/>
+    <SolidColorBrush Color="#D2F0FF" x:Key="BarraCargaColor2"/>
+
+    <SolidColorBrush Color="#B8D6FF" x:Key="Icon1"/>
+</ResourceDictionary>

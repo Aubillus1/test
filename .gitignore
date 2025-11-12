@@ -1,0 +1,42 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio Code settings
+.vscode/
+
+# Rider settings
+.idea/
+
+# Logs
+*.log
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# Others
+*.DS_Store
+*.db
+*.HsPvSerP.msi
+*.setup.exe
+*.HsPvSerP.zip
+# DotCover
+*.dotCover
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# User-specific files
+*.userprefs

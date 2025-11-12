@@ -1,0 +1,528 @@
+﻿<Window x:Class="HsPvSerAPG.Vista.Doc_Venta.Boleta.TipoDePago"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:HsPvSerAPG.Vista.Doc_Venta.Boleta"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen"
+        Title="Pagos" Height="750" Width="1200" Background="{DynamicResource GradientBackground}" Icon="/Utils/Imagenes/logo.png">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="10,5" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <!--<ComboBox x:Name="CBtipodoc" Width="100" FontFamily="Tahoma" FontWeight="Bold" IsEnabled="False" Margin="5,0" SelectionChanged="CBtipodoc_SelectionChanged"/>
+                <ComboBox x:Name="CMBserie" Width="100" FontFamily="Tahoma" FontWeight="Bold" IsEnabled="False" Margin="5,0">
+                    
+                </ComboBox>-->
+                <!--para obtener -->
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBlock x:Name="txtTipPago" Background="Transparent" Foreground="{DynamicResource Text}" TextAlignment="Center" Margin="10,0" FontSize="16" Width="150" FontFamily="Segoe UI Black" Visibility="Collapsed"
+                               />
+                </Border>
+                <!--para mostrar-->
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBlock  Text="?" Background="Transparent" Foreground="{DynamicResource Text}" TextAlignment="Center" Margin="10,0" FontSize="16" Width="150" FontFamily="Segoe UI Black"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Vendedor" Margin="5,0" FontFamily="Tahoma" FontWeight="Bold" FontSize="16"/>
+                <ComboBox x:Name="CBVendedor" Width="150" Background="Transparent" BorderThickness="0" Margin="0,0,90,0" FontSize="15" />
+                <TextBlock Width="200" Background="Transparent" Margin="0,0,50,0"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="#2D5B87" BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Background="#4889C7" BorderThickness="0">
+                        <TextBlock Grid.Row="0" Text="Tipos de Pago" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" FontFamily="Bahnschrift" FontWeight="Bold"/>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" Background="{DynamicResource TextBox}"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      CanContentScroll="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Button x:Name="BtnEfectivo" Tag="0" Grid.Row="0" Background="{DynamicResource BtnPagoBackground}" Height="60" BorderThickness="0" Click="BtnEfectivo_Click">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome x:Name="IconoPago" Grid.Column="0" Icon="Money" Foreground="{DynamicResource BtnPagoBorder}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left">
+                                            <fa:ImageAwesome.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="-15.398"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </fa:ImageAwesome.RenderTransform>
+
+                                        </fa:ImageAwesome>
+                                        <TextBlock x:Name="TBEfectivo" Grid.Column="1" Text="EFECTIVO" VerticalAlignment="Center" Margin="10,0" Foreground="{DynamicResource BtnPagoBorder}" FontSize="40" FontFamily="Bahnschrift Condensed" FontWeight="SemiBold" HorizontalAlignment="Stretch"/>
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Row="1" Name="SegmentoTarjeta">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="0"/>
+                                </Grid.RowDefinitions>
+                                <!--Boton principal-->
+                                <Button x:Name="BtnTarjeta" Grid.Row="0" Background="{DynamicResource BtnTarjetaBackground}" Height="60" BorderThickness="0" Click="Click_BtnTarjeta">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome x:Name="IconoTarjeta" Grid.Column="0" Icon="CreditCard" Foreground="{DynamicResource BtnTarjetaBorder}" RenderTransformOrigin="0.5,0.5" >
+                                            <fa:ImageAwesome.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="-15.398"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </fa:ImageAwesome.RenderTransform>
+
+                                        </fa:ImageAwesome>
+                                        <TextBlock x:Name="TBTarjeta" Grid.Column="1" Text="TARJETA DE CRED./DEBI." VerticalAlignment="Center" Margin="5,0" Foreground="{DynamicResource BtnTarjetaBorder}" FontSize="35" FontFamily="Bahnschrift Condensed" FontWeight="SemiBold"/>
+                                    </Grid>
+                                </Button>
+
+                                <!--Botones secundarios-->
+                                <StackPanel Orientation="Vertical" Grid.Row="1" x:Name="SubContenedoresTarjetas">
+                                    <!--<Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Width="100" Source="/Utils/visa_logo.png"/>
+                                        </Button>
+                                        <Button Grid.Column="1" Background="#010066" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Width="90" Source="/Utils/MasterCard.png"/>
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Utils/AmericanExpress.png" />
+                                        </Button>
+                                        <Button Grid.Column="1" Background="#A8A8A8" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Utils/Diners_Club_logo.png" />
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/Discover_Card_logo.png" Width="150"/>
+                                        </Button>
+                                        <Button Grid.Column="1" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/JCB_logo.png" />
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/UnionPay_logo.png" />
+                                        </Button>
+                                        <Button Grid.Column="1" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/tarjeta_oh_logo.png" Width="80" />
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/Logotipo_Banco_Falabella.png" Width="150"/>
+                                        </Button>
+                                        <Button Grid.Column="1" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/Logo_Ripley_banco.png"  Width="150"/>
+                                        </Button>
+                                    </Grid>-->
+
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="2" Name="SegmentoBanco">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="0"/>
+                                </Grid.RowDefinitions>
+                                <!--Boton principal-->
+
+                                <Button x:Name="BtnBanco" Grid.Row="0" Background="{DynamicResource BtnBancoBackground}" Height="60" BorderThickness="0" Click="Click_BtnDeposito">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome x:Name="IconoBanco" Grid.Column="0" Icon="Bank" Foreground="{DynamicResource BtnBancoBorder}" />
+                                        <TextBlock x:Name="TBBanco" Grid.Column="1" Text="DEPOSITO BANCO" VerticalAlignment="Center" Margin="5,0" Foreground="{DynamicResource BtnBancoBorder}" FontSize="40" FontFamily="Bahnschrift Condensed" FontWeight="SemiBold"/>
+                                    </Grid>
+                                </Button>
+
+                                <!--Botones secundarios-->
+                                <StackPanel Grid.Row="1" Orientation="Vertical" x:Name="SubContenedoresBanco">
+                                    <!--<Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="#001c66" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Width="150" Source="/Utils/bcp_logo.png"/>
+                                        </Button>
+                                        <Button Grid.Column="1" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Width="150" Source="/Utils/Interbank_logo.png"/>
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="#5e0c72" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Utils/yape.png" />
+                                        </Button>
+                                        <Button Grid.Column="1" Background="#FF94D1E6" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Utils/plin-interbank.png" Width="70"/>
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="#cc2229" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/scotiabank_logo.png" Height="120"/>
+                                        </Button>
+                                        <Button Grid.Column="1" Background="#004481" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/BBVA_logo.png" Height="30"/>
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="#009846" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/mibanco_loogo.png" />
+                                        </Button>
+                                        <Button Grid.Column="1" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/Banco_Pichincha_logo.png" Width="140"/>
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/bancostandanter_logo.png" Height="50"/>
+                                        </Button>
+                                        <Button Grid.Column="1" Background="White" Height="60" BorderBrush="#3A4F8A" BorderThickness="2">
+                                            <Image Source="/Vista/Doc Venta/Boleta/citibank_logo.png" Width="140"/>
+                                        </Button>
+                                    </Grid>-->
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="10,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="344"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Vertical">
+                                    <TextBlock x:Name="TxtLote" Text="Nro. Lote" FontSize="20" FontFamily="Bahnschrift" TextAlignment="Left"/>
+                                    <Grid>
+                                        <TextBox x:Name="TBNroLote" Background="{DynamicResource TextBoxSombreado}" FontSize="20" BorderThickness="0" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                        <TextBox x:Name="TBNroOperacion" Background="{DynamicResource TextBoxSombreado}" FontSize="20" BorderThickness="0" Visibility="Collapsed" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel x:Name="SPBancoOpcion" Grid.Row="1" Orientation="Vertical">
+                                    <TextBlock Text="Fecha de Operación" FontSize="20" FontFamily="Bahnschrift" TextAlignment="Left" TextWrapping="Wrap"/>
+                                    <DatePicker x:Name="DPFechaOperacion" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" FontSize="18" IsEnabled="True" SelectedDate="{x:Static sys:DateTime.Today}" FontFamily="Bahnschrift Condensed">
+                                        <DatePicker.Resources>
+                                            <Style TargetType="Button" x:Key="DatePickerButtonStyle" >
+                                                <Setter Property="Content" Value="📅"/>
+                                                <Setter Property="FontSize" Value="18"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                            </Style>
+                                            <Style TargetType="DatePickerTextBox">
+                                                <Setter Property="Background" Value="{DynamicResource TextBox}"/>
+                                            </Style>
+                                        </DatePicker.Resources>
+                                    </DatePicker>
+                                </StackPanel>
+                            </Grid>
+                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0">
+                                <TextBlock Text="Detalle" FontSize="20" FontFamily="Bahnschrift" TextAlignment="Left"/>
+                                <Border CornerRadius="10" BorderBrush="{DynamicResource BordeTextBox}" Height="105" BorderThickness="2" Background="{DynamicResource TextBox}">
+                                    <TextBox x:Name="TBDetalle" Background="Transparent" FontSize="20" TextWrapping="Wrap" Margin="5" BorderThickness="0"/>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="10,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="260"/>
+                                <ColumnDefinition Width="220"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="Importe" FontSize="20" FontFamily="Bahnschrift"/>
+                                    <ComboBox x:Name="CambMoneda" Width="100" Height="25" Margin="10,0,0,5" SelectionChanged="CBCambiar_Seleccion" HorizontalAlignment="Stretch">
+                                        <ComboBoxItem Content="Soles" Tag="1" IsSelected="True"/>
+                                        <ComboBoxItem Content="Dólares" Tag="2"/>
+                                    </ComboBox>
+                                </StackPanel>
+                                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="2">
+                                    <TextBox x:Name="Importe" Text="0.00" FontSize="50" Background="Transparent" BorderThickness="0" TextAlignment="Right" PreviewTextInput="TextBox_PreviewTextInput" KeyDown="Importe_KeyDown"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Sucursal:" FontSize="20" FontFamily="Bahnschrift Condensed"/>
+                                    <ComboBox x:Name="CBSucursal" Width="140" Height="25" Margin="10,0,0,5" HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+                                <Button x:Name="BtnAgregarPago" Background="{DynamicResource BotonAceptarBackground}" Height="66.5" VerticalAlignment="Bottom" BorderThickness="0" Margin="10,0" Click="Click_AgregarPago">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid>
+                                            <fa:ImageAwesome Icon="Circle" Foreground="{DynamicResource BotonAceptarBorder}" Width="40" Height="40"/>
+                                            <fa:ImageAwesome Icon="Check" Foreground="{DynamicResource BotonAceptarBackground}" Width="20" Height="20"/>
+                                        </Grid>
+                                        <TextBlock Text="Agregar Pago" VerticalAlignment="Center" Foreground="{DynamicResource BotonAceptarBorder}" FontSize="20" FontFamily="Bahnschrift" FontWeight="Bold" Margin="10,0"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Margin="5,5" BorderThickness="0" Background="{DynamicResource BtnCurrentBackground}" Click="Click_BtnGrabar">
+                            <StackPanel>
+                                <fa:ImageAwesome Icon="Save" Foreground="{DynamicResource BtnCurrentBorder}" Height="110"/>
+                                <TextBlock Text="Grabar" Foreground="{DynamicResource BtnCurrentBorder}" TextAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0,30,0,0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Column="1" Margin="5,5" BorderThickness="0" Background="{DynamicResource BtnSalirBackground}" Click="Click_BtnSalir">
+                            <StackPanel>
+                                <fa:ImageAwesome Icon="TimesCircle" Foreground="{DynamicResource BtnSalirBorder}" Height="110"/>
+                                <TextBlock Foreground="{DynamicResource BtnSalirBorder}" Text="Salir" TextAlignment="Center" FontSize="45" FontWeight="Bold" Margin="0,30,0,0"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock x:Name="TBTituloPago" Text="Detalle de Pagos :" FontSize="25" FontFamily="Bahnschrift" FontWeight="Bold" Margin="10,5"/>
+                    <Grid>
+                        <Grid x:Name="Icon1" Visibility="Collapsed">
+                            <StackPanel Background="{DynamicResource BtnPagoBackground}" Width="30" Height="20"/>
+                            <fa:ImageAwesome Width="30" Icon="Money" Foreground="{DynamicResource BtnPagoBorder}" />
+                        </Grid>
+                        <Grid x:Name="Icon2" Visibility="Collapsed">
+                            <StackPanel Background="{DynamicResource BtnTarjetaBackground}" Width="30" Height="20"/>
+                            <fa:ImageAwesome Width="30" Icon="CreditCard" Foreground="{DynamicResource BtnTarjetaBorder}"/>
+                        </Grid>
+                        <Grid x:Name="Icon3" Visibility="Collapsed">
+                            <fa:ImageAwesome Width="34" Icon="Bank" Foreground="{DynamicResource BtnBancoBorder}"/>
+                            <fa:ImageAwesome Width="30" Icon="Bank" Foreground="{DynamicResource BtnBancoBackground}"/>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+                <DataGrid Grid.Row="2" Margin="10,5" Background="{DynamicResource DataGrid}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False"
+                          HeadersVisibility="Column" HorizontalAlignment="Stretch" FontFamily="Bahnschrift Condensed" BorderThickness="1" x:Name="dgPagos" BorderBrush="{DynamicResource BordeTextBox}" ItemsSource="{Binding Pagos}">
+                    <DataGrid.Resources>
+                        <Style x:Key="CenterHeaderStyle" x:Name="EstiloHeader" TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="Height" Value="35"/>
+                            <Setter Property="FontFamily" Value="Bahnschrift Condensed"/>
+                        </Style>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Background" Value="{DynamicResource TextBox}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <!-- columnas para efectivo -->
+                        <DataGridTextColumn Header="Tip. del Pago" Width="*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colEfectivoTipo" Binding="{Binding TipoPago}"/>
+                        <DataGridTextColumn Header="Detalle" Width="2*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colEfectivoDetalle" Binding="{Binding Detalle}"/>
+
+                        <!-- columnas para tarjeta -->
+                        <DataGridTextColumn Header="Nr. Lote" Width="*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colLote_operacion" Binding="{Binding NrOperacion}" ElementStyle="{StaticResource TextoPrecio}"/>
+
+                        <!-- columnas para banco -->
+                        <DataGridTextColumn Header="Tarjetas" Width="*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colTarjeta" Binding="{Binding Tarjeta}"/>
+                        <!--<DataGridTextColumn Header="Bancos" Width="*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colBanco" Binding="{Binding Banco}"/>-->
+                        
+                        
+                        <DataGridTextColumn Header="Fecha de Operación" Width="2*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colFecha" Binding="{Binding Fechaoperacion}" Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="Codigo" Width="2*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colCodigo" Binding="{Binding Codigo}" Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="Importe" Width="0.5*" HeaderStyle="{StaticResource CenterHeaderStyle}" x:Name="colEfectivoImporte" Binding="{Binding Importe, StringFormat={}{0:N2}}"  ElementStyle="{StaticResource TextoPrecio}"/>
+                        <DataGridTemplateColumn Width="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="Click_EliminarFila" Background="{DynamicResource BtnSalirBackground}" BorderThickness="0" Height="25">
+                                        <fa:ImageAwesome Icon="Close" Foreground="{DynamicResource BtnSalirBorder}" Height="15"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.Row="3" Margin="10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Valor Venta S/" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBoxSombreado}">
+                            <TextBlock x:Name="txt_valorVenta" Text="{Binding ImporteInicial, StringFormat={}{0:N2}}" FontSize="40" Margin="10,0" Background="Transparent" TextAlignment="Right"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Tot. Pago S/" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBoxSombreado}">
+                            <TextBlock x:Name="Total_Pago" Text="{Binding TotalPagos, StringFormat={}{0:N2}}" FontSize="40" Margin="10,0" Background="Transparent" TextAlignment="Right"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Paga con S/" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBox}"  BorderThickness="2">
+                            <TextBox x:Name="Paga_con" Text="{Binding TotalPagos, StringFormat={}{0:N2}, Mode=OneWay}" FontSize="40" Background="Transparent" BorderThickness="0" Margin="10,0" TextAlignment="Right" PreviewTextInput="TextBox_PreviewTextInput"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Vuelto S/" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBoxSombreado}">
+                            <TextBlock x:Name="Vuelto" Text="{Binding Restante, StringFormat={}{0:N2}}" FontSize="40" Margin="10,0" Background="Transparent" TextAlignment="Right"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="4" Margin="10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Valor Venta US$" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBoxSombreado}">
+                            <TextBlock x:Name="txt_valorVentaDolares" Text="{Binding ImporteInicialUSD, StringFormat={}{0:N2}}" FontSize="40" Margin="10,0" Background="Transparent" TextAlignment="Right"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Tot. Pago US$" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBoxSombreado}">
+                            <TextBlock x:Name="Total_PagoDolares" Text="{Binding TotalPagosUSD, StringFormat={}{0:N2}}" FontSize="40" Margin="10,0" Background="Transparent" TextAlignment="Right"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Paga con US$" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBox}"  BorderThickness="2">
+                            <TextBox x:Name="Paga_conDolares" Text="{Binding TotalPagosUSD, StringFormat={}{0:N2}, Mode=OneWay}" FontSize="40" Background="Transparent" BorderThickness="0" Margin="10,0" TextAlignment="Right" PreviewTextInput="TextBox_PreviewTextInput"/>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" HorizontalAlignment="Stretch" Orientation="Vertical" Margin="5,0">
+                        <TextBlock Text="Vuelto US$" FontSize="20" TextAlignment="Center"/>
+                        <Border CornerRadius="10" Background="{DynamicResource TextBoxSombreado}">
+                            <TextBlock x:Name="VueltoDolares" Text="{Binding RestanteUSD, StringFormat={}{0:N2}}" FontSize="40" Margin="10,0" Background="Transparent" TextAlignment="Right"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

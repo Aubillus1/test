@@ -1,0 +1,161 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Colores generales -->
+    <SolidColorBrush Color="Black" x:Key="SwitchTemaBackground" />
+    <SolidColorBrush Color="White" x:Key="SwitchTemaCircle" />
+    <Color x:Key="ColorBackgroundSwitch">White</Color>
+
+    <Style TargetType="TextBox">
+        <Setter Property="CaretBrush" Value="Black"/>
+    </Style>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="CaretBrush" Value="Black"/>
+    </Style>
+
+    <SolidColorBrush Color="#81ed8e" x:Key="BotonAceptarBackground" />
+    <SolidColorBrush Color="#2c9b3a" x:Key="BotonAceptarBorder" />
+    <Color x:Key="BtnAceptarSombra">#2c9b3a</Color>
+
+    <SolidColorBrush Color="#F77474" x:Key="BtnCerrarBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#692525" x:Key="BtnCerrarBorder"></SolidColorBrush>
+
+    <RadialGradientBrush x:Key="GradientBackground" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5" GradientOrigin="0.5,0.5">
+        <GradientStop Color="#9ec9f6" Offset="0.0" />
+        <GradientStop Color="#89b1fd" Offset="1.0" />
+    </RadialGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearBackground" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#83A2DE" Offset="0.0" />
+        <GradientStop Color="#749BE8" Offset="1.0" />
+    </LinearGradientBrush>
+    <SolidColorBrush Color="Black" x:Key="Text" />
+    <SolidColorBrush Color="#202020" x:Key="Text2"></SolidColorBrush>
+    <SolidColorBrush Color="White" x:Key="TextBox" />
+    <SolidColorBrush Color="#CEE0F2" x:Key="TextBoxSombreado" />
+    <SolidColorBrush Color="Black" x:Key="BordeTextBox" />
+    <Color x:Key="Sombras">Black</Color>
+
+    <SolidColorBrush Color="#96D2FA" x:Key="BtnCurrentBackground"/>
+    <SolidColorBrush Color="#517F9E" x:Key="BtnCurrentBorder"/>
+
+    <!---Colores POS-->
+    <SolidColorBrush Color="White" x:Key="DataGrid"></SolidColorBrush>
+    <SolidColorBrush Color="#ABABAB" x:Key="DataGridHeader"></SolidColorBrush>
+
+    <SolidColorBrush Color="LightYellow" x:Key="TBTotales"></SolidColorBrush>
+    <SolidColorBrush Color="#ffc0c0" x:Key="TBCant"></SolidColorBrush>
+
+    <SolidColorBrush Color="#B4D1D1" x:Key="BtnProductosBackground"></SolidColorBrush>
+    <SolidColorBrush Color="DarkSlateGray" x:Key="BtnProductosBorder"></SolidColorBrush>
+    <SolidColorBrush Color="OrangeRed" x:Key="BtnProductosEtiqueta"></SolidColorBrush>
+
+    <SolidColorBrush Color="#B1B1B5" x:Key="BtnGavetaBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#333" x:Key="BtnGavetaBorder"></SolidColorBrush>
+
+    <SolidColorBrush Color="#ffc0c1" x:Key="BtnSalirBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#A11F24" x:Key="BtnSalirBorder"></SolidColorBrush>
+    <Color x:Key="SombraSalir">#A11F24</Color>
+
+    <SolidColorBrush Color="#DBB8F5" x:Key="BtnReenviarBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#9376a7" x:Key="BtnReenviarBorder"></SolidColorBrush>
+    <Color x:Key="SombraReenviar">#9376a7</Color>
+
+    <SolidColorBrush Color="#B0B0B0" x:Key="BtnLimpiarBackground"></SolidColorBrush>
+    <SolidColorBrush Color="Black" x:Key="BtnLimpiarBorder"></SolidColorBrush>
+    <Color x:Key="SombraLimpiar">Black</Color>
+
+    <SolidColorBrush Color="#BDB0F5" x:Key="BtnReemCajaBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#6c4aff" x:Key="BtnReemCajaBorder"></SolidColorBrush>
+    <Color x:Key="SombraReemCaja">#6c4aff</Color>
+
+    <SolidColorBrush Color="#FFEBC4" x:Key="BtnCajaChicaBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#D1AB64" x:Key="BtnCajaChicaBorder"></SolidColorBrush>
+    <Color x:Key="SombraCajaChica">#FFEBC4</Color>
+
+    <SolidColorBrush Color="#FAF5B6" x:Key="BtnCajaChicaOpcionesBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#BAB259" x:Key="BtnCajaChicaOpcionesForeground"></SolidColorBrush>
+    <SolidColorBrush Color="#fedc00" x:Key="BtnCajaChicaIconoBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#f5be00" x:Key="BtnCajaChicaIcono2Background"></SolidColorBrush>
+
+
+    <SolidColorBrush Color="White" x:Key="BtnClientesBackground"></SolidColorBrush>
+    <SolidColorBrush Color="Gray" x:Key="BtnClientesBorder"></SolidColorBrush>
+    <Color x:Key="SombraClientes">Gray</Color>
+
+    <SolidColorBrush Color="#F0E3A8" x:Key="BtnProductosPrincipalBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#9C8D4E" x:Key="BtnProductosPrincipalBorder"></SolidColorBrush>
+    <Color x:Key="SombraProductosPrincipal">#9C8D4E</Color>
+
+    <SolidColorBrush Color="#94D7F2" x:Key="BtnDocVentaBackground"></SolidColorBrush>
+    <SolidColorBrush Color="#467C91" x:Key="BtnDocVentaBorder"></SolidColorBrush>
+    <Color x:Key="SombraDocVenta">#467C91</Color>
+
+    <LinearGradientBrush x:Key="ToolStrip" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#5E78A8" Offset="0"/>
+        <!-- Gris muy claro (casi blanco) -->
+        <GradientStop Color="#37548A" Offset="0.25"/>
+        <!-- Gris claro -->
+        <GradientStop Color="#638DDB" Offset="0.5"/>
+        <!-- Gris medio-claro -->
+        <GradientStop Color="#2E63C7" Offset="0.75"/>
+        <!-- Gris claro -->
+        <GradientStop Color="#4D87AB" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="HeaderPanelDerecho" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#5759C9" Offset="0"/>
+        <GradientStop Color="LightBlue" Offset="0.5"/>
+        <GradientStop Color="#4D87AB" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush Color="#2E2F66" x:Key="BorderPanel"></SolidColorBrush>
+
+    <LinearGradientBrush x:Key="HeaderSubPanel" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#BF3030" Offset="0"/>
+        <GradientStop Color="#F56C6C" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush Color="#611111" x:Key="BorderSubPanel"></SolidColorBrush>
+
+
+    <SolidColorBrush Color="White" x:Key="BackgroundPanel"></SolidColorBrush>
+
+    <LinearGradientBrush x:Key="UMDBackground" StartPoint="0,0" EndPoint="1,0.5">
+        <GradientStop Color="#C9A932" Offset="0"/>
+        <GradientStop Color="#FADF7D" Offset="0.3"/>
+        <GradientStop Color="#FADF7D" Offset="0.6"/>
+        <GradientStop Color="#C9A932" Offset="1"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush Color="#FFE875" x:Key="GridUMD"/>
+
+    <!-- Colores Ventanas -->
+    <SolidColorBrush Color="#B86C8E" x:Key="BtnReniecBackground"/>
+    <SolidColorBrush Color="#6e2143" x:Key="BtnReniecBorder"/>
+
+    <SolidColorBrush Color="#8090E0" x:Key="BtnBuscarBackground"/>
+    <SolidColorBrush Color="#313A69" x:Key="BtnBuscarBorder"/>
+
+    <SolidColorBrush Color="#CAFCFC" x:Key="BtnConsultarBackground"/>
+    <SolidColorBrush Color="#8AA8A8" x:Key="BtnConsultarBorder"/>
+
+    <SolidColorBrush Color="#C5F291" x:Key="BtnPagoBackground"/>
+    <SolidColorBrush Color="#86c938" x:Key="BtnPagoBorder"/>
+
+    <SolidColorBrush Color="#f5f992" x:Key="BtnTarjetaBackground"/>
+    <SolidColorBrush Color="#737632" x:Key="BtnTarjetaBorder"/>
+
+    <SolidColorBrush Color="#FFB75C" x:Key="BtnBancoBackground"/>
+    <SolidColorBrush Color="#D1A164" x:Key="BtnBancoBorder"/>
+
+    <SolidColorBrush Color="#74B383" x:Key="BtnBoletaBackground"/>
+    <SolidColorBrush Color="#174c23" x:Key="BtnBoletaBorder"/>
+
+    <SolidColorBrush Color="#99B7E8" x:Key="BtnFacturaBackground"/>
+    <SolidColorBrush Color="#1f2249" x:Key="BtnFacturaBorder"/>
+
+    <SolidColorBrush Color="White" x:Key="BtnPDFBackground"/>
+    <SolidColorBrush Color="#e20001" x:Key="BtnPDFBorder"/>
+
+    <SolidColorBrush Color="#FA901E" x:Key="IsTodayCalendarBackground"/>
+    <SolidColorBrush Color="Black" x:Key="IsTodayCalendarText"/>
+</ResourceDictionary>

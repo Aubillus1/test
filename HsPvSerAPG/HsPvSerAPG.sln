@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsPvSerAPG", "HsPvSerAPG.csproj", "{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Debug|x86.ActiveCfg = Debug|x86
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Debug|x86.Build.0 = Debug|x86
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Release|x86.ActiveCfg = Release|x86
+		{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B333EC19-B40A-4219-AC1F-0DF73152847C}
+	EndGlobalSection
+EndGlobal

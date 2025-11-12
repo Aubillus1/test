@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Actualizar.Vista.ControlUsuario.Welcom"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Actualizar.Vista.ControlUsuario"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             d:Width="824" d:Height="500" 
+             Background="{DynamicResource Background}" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Path Fill="{DynamicResource EtiquetaColor}" StrokeThickness="0"
+          HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="0,0">
+                                <!-- Triángulo apuntando hacia abajo y hacia la izquierda -->
+                                <LineSegment Point="200,0" />
+                                <LineSegment Point="0,150" />
+                                <LineSegment Point="0,0" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <TextBlock Text="Actualizar" Foreground="{DynamicResource Text3}" FontSize="40" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Bahnschrift Condensed">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="323" CenterX="60" CenterY="50"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
+            <Image Grid.Column="2" Source="/Utils/Imagenes/hardsystemlogo.png" HorizontalAlignment="Right"/>
+        </Grid>
+        <TextBlock Grid.Row="1" Text="ACTUALIZANDO..." FontSize="50" FontFamily="Bahnschrift" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <local:Carga Grid.Row="2">
+            
+        </local:Carga>
+    </Grid>
+
+</UserControl>

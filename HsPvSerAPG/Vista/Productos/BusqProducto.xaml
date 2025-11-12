@@ -1,0 +1,189 @@
+﻿<Window x:Class="HsPvSerAPG.Vista.BusqProducto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HsPvSerAPG.Vista"
+        xmlns:control="clr-namespace:HsPvSerAPG.Vista.Control_de_Usuario"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d" WindowStyle="SingleBorderWindow" ResizeMode="NoResize"
+        Title="Búsqueda Producto" Height="700" Width="575" WindowStartupLocation="CenterScreen" 
+        Icon="/Utils/Imagenes/logo.png" Background="{DynamicResource GradientBackground}">
+    <Grid Margin="8" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Barra de búsqueda -->
+        <Grid Grid.Row="0" Margin="0,5,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Caja de texto -->
+            <Border Grid.Column="0" CornerRadius="6" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1" Margin="4">
+                <TextBox x:Name="txtCriterio" Margin="4,0" Height="28" 
+                         VerticalAlignment="Center" FontSize="26"
+                         BorderThickness="0" Background="Transparent"
+                         KeyDown="txtCriterio_KeyDown" FontFamily="Bahnschrift Condensed"/>
+            </Border>
+
+            <!-- Botón Buscar -->
+            <Button Grid.Column="1" x:Name="BtnBuscar" Margin="4,0,0,0" Width="50" Height="40" Background="{DynamicResource BtnBuscarBackground}" BorderThickness="0"
+                    Cursor="Hand" Click="BtnBuscar_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="8" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid>
+                                            <fa:ImageAwesome Icon="Search" Foreground="{DynamicResource BtnBuscarBorder}" Width="24" Height="24" />
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="BorderBrush" Value="#d0d7e6"/>
+                        <Setter Property="Foreground" Value="#333"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#e1f5fe"/>
+                                <Setter Property="BorderBrush" Value="#00bcd4"/>
+                                <Setter Property="Foreground" Value="#00bcd4"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <!-- Botón Salir -->
+            <Button Grid.Column="2" Margin="6,0,10,0" Width="50" Height="40" Background="{DynamicResource BtnSalirBackground}" BorderThickness="0"
+                    Cursor="Hand" Click="Btn_Click_Salir">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="8" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid>
+                                            <fa:ImageAwesome Icon="TimesCircle" Width="24" Height="24" Foreground="{DynamicResource BtnSalirBorder}"/>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="BorderBrush" Value="#d0d7e6"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#ffebee"/>
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+
+        <!-- Tabla de productos -->
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="DGProductos" IsReadOnly="True"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False"
+                  FontFamily="Bahnschrift Condensed" FontSize="20" RowHeight="35"
+                  BorderThickness="2" SelectionMode="Single" SelectionUnit="FullRow"
+                  HeadersVisibility="Column" GridLinesVisibility="None"
+                  MouseDoubleClick="DGProductos_MouseDoubleClick" PreviewKeyDown="DGProductos_PreviewKeyDown" SelectionChanged="DGProductos_SelectionChanged">
+                <DataGrid.Resources>
+                    <!-- Estilo cabecera -->
+                    <Style x:Key="CenterHeaderStyle" TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="#869FBA"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Height" Value="35"/>
+                    </Style>
+
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    </Style>
+
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Width="60" Binding="{Binding Codigo}" HeaderStyle="{StaticResource CenterHeaderStyle}"  ElementStyle="{StaticResource TextoPrecio}"/>
+                    <DataGridTextColumn Header="Descripción" Width="*" Binding="{Binding Descripcion}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTextColumn Header="Cant" Width="60" Binding="{Binding Cant}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTemplateColumn Header=" " Width="60" HeaderStyle="{StaticResource CenterHeaderStyle}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Background="{DynamicResource BotonAceptarBackground}" BorderThickness="2" BorderBrush="{DynamicResource BotonAceptarBorder}" Click="BtnSubirImagen_Click">
+                                    <fa:ImageAwesome Icon="Upload" Foreground="{DynamicResource BotonAceptarBorder}" Width="20" Height="20"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header=" " Width="60" HeaderStyle="{StaticResource CenterHeaderStyle}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Background="{DynamicResource TextBox}" BorderThickness="2" BorderBrush="{DynamicResource Text2}" Click="BtnMostrar_Click">
+                                    <fa:ImageAwesome x:Name="IconMostrar" Icon="Eye" Foreground="{DynamicResource Text2}" Width="30" Height="30"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <control:CargarGeneral x:Name="Cargando" Visibility="Collapsed"/>
+        </Grid>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Left" Margin="0,10" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}" Text="STOCK :" VerticalAlignment="Top" FontSize="30"/>
+
+        <Grid Grid.Row="3">
+            <DataGrid Grid.Row="3" x:Name="DGstock" HorizontalAlignment="Center"
+                AutoGenerateColumns="False" CanUserAddRows="False"  CanUserResizeColumns="False" IsReadOnly="True"
+                FontFamily="Bahnschrift Condensed" FontSize="16" RowHeight="30" HeadersVisibility="Column"
+                GridLinesVisibility="None" SelectionMode="Single" SelectionUnit="FullRow">
+
+                <DataGrid.Resources>
+                    <!-- Estilo cabecera -->
+                    <Style x:Key="CenterHeaderStyle" TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="#869FBA"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Height" Value="30"/>
+                    </Style>
+                    <!-- Estilo filas -->
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Cursor" Value="Arrow"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Codigo" Width="50" ElementStyle="{StaticResource TextoPrecio}" Binding="{Binding codsuc}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTextColumn Header="Descripcion" Width="*" Binding="{Binding dessuc}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTextColumn Header="Dirección" Width="*" Binding="{Binding dirsuc}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTextColumn Header="Saldo" Width="50" ElementStyle="{StaticResource TextoPrecio}" Binding="{Binding saldo}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTextColumn Header="Salcon" Width="60"  ElementStyle="{StaticResource TextoPrecio}" Binding="{Binding salcon}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTextColumn Header="Ubicacion" Width="*" Binding="{Binding ubicacion}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                    <DataGridTextColumn Header="Fecha" Width="80" Binding="{Binding fecini}" HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <control:CargarSimple x:Name="CargandoStock" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,177 @@
+﻿<Window x:Class="HsPvSerAPG.Vista.RegistroClipro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        Title="Registro de Clientes / Proveedores" Height="619" Width="700"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="{DynamicResource GradientBackground}">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="5,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Código -->
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Código" FontWeight="Bold" FontSize="20" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <Border CornerRadius="10" Background="{DynamicResource TextBoxSombreado}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBlock Text="?" FontSize="20" TextAlignment="Center" Margin="5,0" Background="Transparent"/>
+                </Border>
+            </StackPanel>
+
+            <!-- T/D -->
+            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="T/D" FontSize="20" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <ComboBox x:Name="cmbTipoDocumento" FontSize="15" Foreground="{DynamicResource Text}">
+                    <ComboBoxItem Content="DNI" IsSelected="True"/>
+                    <ComboBoxItem Content="RUC"/>
+                    <ComboBoxItem Content="Pasaporte"/>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Documento -->
+            <StackPanel Grid.Column="2" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Documento"  FontSize="20" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBox x:Name="txtDocumento" FontSize="18" Margin="10,0" Background="Transparent" BorderThickness="0"/>
+                </Border>
+            </StackPanel>
+
+            <!-- Tipo Registro -->
+            <StackPanel Grid.Column="3" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Tipo Registro" FontSize="20" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <ComboBox x:Name="cmbTipoRegistro" FontSize="15" IsEnabled="False">
+                    <ComboBoxItem Content="CLIENTE" IsSelected="True"/>
+                    <ComboBoxItem Content="PROVEEDOR"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+
+        <!-- Apellido Paterno -->
+        <StackPanel Grid.Row="1" Margin="10,10">
+            <TextBlock Text="Apellido Paterno" FontWeight="Bold" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+            <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                <TextBox x:Name="txtApellidoPaterno" FontSize="20" Margin="10,0" BorderThickness="0" Background="Transparent"/>
+            </Border>
+        </StackPanel>
+        <!-- Apellido Materno y Nombres-->
+        <Grid Grid.Row="2" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Apellido Materno" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBox x:Name="txtApellidoMaterno" Background="Transparent" BorderThickness="0" Margin="10,0" FontSize="20"/>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Nombres" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBox x:Name="txtNombres" Background="Transparent" BorderThickness="0" Margin="10,0" FontSize="20"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- Dirección -->
+        <StackPanel Grid.Row="3" Margin="10,10">
+            <TextBlock Text="Dirección" FontWeight="Bold" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+            <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                <TextBox x:Name="txtDireccion" BorderThickness="0" Margin="10,0" Background="Transparent" FontSize="20"/>
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Row="4" Margin="5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Tel. Fijo -->
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Tel. Fijo" FontWeight="Bold" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBox x:Name="txtTelefonoFijo" Background="Transparent" BorderThickness="0" Margin="10,0" FontSize="20"/>
+                </Border>
+            </StackPanel>
+
+            <!-- Tel. Celular -->
+            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Tel. Celular" FontWeight="Bold" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBox x:Name="txtTelefonoCelular" Background="Transparent" BorderThickness="0" Margin="10,0" FontSize="20"/>
+                </Border>
+            </StackPanel>
+
+            <!-- Whatsapp -->
+            <StackPanel Grid.Column="2" Orientation="Vertical" Margin="5,0">
+                <TextBlock Text="Whatsapp" FontWeight="Bold" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                    <TextBox x:Name="txtWhatsapp" Background="Transparent" BorderThickness="0" Margin="10,0" FontSize="20"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- Correo Electrónico -->
+        <StackPanel Grid.Row="5" Margin="10,10">
+            <TextBlock Text="Correo Electrónico" FontWeight="Bold" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+            <Border CornerRadius="10" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                <TextBox x:Name="txtCorreoElectronico" Background="Transparent" BorderThickness="0" Margin="10,0" FontSize="20"/>
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Estado -->
+            <StackPanel Grid.Column="0" Margin="10,0">
+                <TextBlock Text="Estado" FontWeight="Bold" FontSize="25" FontFamily="Bahnschrift Condensed" TextAlignment="Left" Foreground="{DynamicResource Text}"/>
+                <ComboBox x:Name="cmbEstado" FontSize="20" HorizontalAlignment="Left" IsEnabled="False" Width="100">
+                    <ComboBoxItem Content="ACTIVO" />
+                    <ComboBoxItem Content="INACTIVO" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Botones -->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Background="{DynamicResource BtnCurrentBackground}" BorderThickness="0" Cursor="Hand" Click="BtnGrabar_Click" Height="120" VerticalAlignment="Top" Margin="10,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <fa:ImageAwesome Icon="Save" Foreground="{DynamicResource BtnCurrentBorder}" Width="60"/>
+                        <TextBlock Text="Grabar" Foreground="{DynamicResource BtnCurrentBorder}" FontWeight="Bold" FontSize="54" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="1" Background="{DynamicResource BtnSalirBackground}" BorderThickness="0" Cursor="Hand" Click="BtnSalir_Click" Height="120" VerticalAlignment="Top" Margin="10,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <fa:ImageAwesome Icon="PowerOff" Foreground="{DynamicResource BtnSalirBorder}" Width="60"/>
+                        <TextBlock Text="Salir" Foreground="{DynamicResource BtnSalirBorder}" FontWeight="Bold" FontSize="54" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"/>
+                    </StackPanel>
+                </Button>
+
+            </Grid>
+        </Grid>
+
+
+    </Grid>
+</Window>

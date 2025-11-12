@@ -1,0 +1,823 @@
+<Window x:Class="HsPvSerAPG.PuntoDeVenta"
+        
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:control="clr-namespace:HsPvSerAPG.Vista.Control_de_Usuario"
+        mc:Ignorable="d"
+        x:Name="VentanaGeneral"
+        WindowStyle="None" WindowState="Maximized" AllowsTransparency="True"
+        Title="Módulo de Ventas" Icon="/Utils/Imagenes/logo_pequeño.png" Loaded="Window_Loaded" SizeChanged="Window_Changed" Background="{DynamicResource GradientBackground}" d:Width="1366" d:Height="768">
+    <Window.Resources>
+        <Style x:Key="CenterCellStyle" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style x:Key="ClickableCard" TargetType="Border">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="2" BlurRadius="5" Opacity="0.3"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <!-- Hover -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#f0f8ff"/>
+                    <Setter Property="BorderBrush" Value="DodgerBlue"/>
+                </Trigger>
+
+                <!-- Click visual -->
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#d6eaff"/>
+                    <Setter Property="BorderBrush" Value="Blue"/>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CenterHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Storyboard x:Key="MostrarPanelDerecho">
+            <DoubleAnimation Storyboard.TargetName="PanelDerecho"
+                     Storyboard.TargetProperty="Width"
+                     From="0" To="400"
+                     Duration="0:0:0.3"
+                     AccelerationRatio="0.2"
+                     DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <!-- Ocultar Panel Derecho -->
+        <Storyboard x:Key="OcultarPanelDerecho">
+            <DoubleAnimation Storyboard.TargetName="PanelDerecho"
+                     Storyboard.TargetProperty="Width"
+                     From="400" To="0"
+                     Duration="0:0:0.3"
+                     AccelerationRatio="0.2"
+                     DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="MostrarSubPanel">
+            <DoubleAnimation Storyboard.TargetName="SubPanel"
+                     Storyboard.TargetProperty="Width"
+                     From="0" To="380"
+                     Duration="0:0:0.3"
+                     AccelerationRatio="0.2"
+                     DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="OcultarSubPanel">
+            <DoubleAnimation Storyboard.TargetName="SubPanel"
+                     Storyboard.TargetProperty="Width"
+                     From="380" To="0"
+                     Duration="0:0:0.3"
+                     AccelerationRatio="0.2"
+                     DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="MostrarDetalles">
+            <DoubleAnimation Storyboard.TargetName="DetalleProductoPanel"
+                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                     From="0" To="1"
+                     Duration="0:0:0.3"
+                     AccelerationRatio="0.2"
+                     DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="OcultarDetalles">
+            <DoubleAnimation Storyboard.TargetName="DetalleProductoPanel"
+                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                     From="1" To="0"
+                     Duration="0:0:0.3"
+                     AccelerationRatio="0.2"
+                     DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="MostrarGaveta">
+            <DoubleAnimation Storyboard.TargetName="Gaveta"
+         Storyboard.TargetProperty="Width"
+         From="0" To="200"
+         Duration="0:0:0.4"
+         AccelerationRatio="0.2"
+         DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="OcultarGaveta">
+            <DoubleAnimation Storyboard.TargetName="Gaveta"
+         Storyboard.TargetProperty="Width"
+         From="200" To="0"
+         Duration="0:0:0.4"
+         AccelerationRatio="0.2"
+         DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="OcultarDatosEnCasodeResolucionMenor">
+            <DoubleAnimation Storyboard.TargetName="DatosCliente"
+                Storyboard.TargetProperty="Width"
+                From="870" To="520"
+                Duration="0:0:0.4"
+                AccelerationRatio="0.2"
+                DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="MostrarDatosEnCasodeResolucionMenor">
+            <DoubleAnimation Storyboard.TargetName="DatosCliente"
+                Storyboard.TargetProperty="Width"
+                From="520" To="870"
+                Duration="0:0:0.4"
+                AccelerationRatio="0.2"
+                DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="OcultarBotones">
+            <DoubleAnimation Storyboard.TargetName="DatosCliente"
+        Storyboard.TargetProperty="Width"
+        From="520" To="0"
+        Duration="0:0:0.4"
+        AccelerationRatio="0.2"
+        DecelerationRatio="0.8"/>
+        </Storyboard>
+
+        <Storyboard x:Key="MostrarBotones">
+            <DoubleAnimation Storyboard.TargetName="DatosCliente"
+        Storyboard.TargetProperty="Width"
+        From="0" To="520"
+        Duration="0:0:0.4"
+        AccelerationRatio="0.2"
+        DecelerationRatio="0.8"/>
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="6,6,0,0" Grid.Row="0" Name="ContenendorSecundario">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="SPPrimeraColumna" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Datos cliente y Botones superiores-->
+                    <RowDefinition Height="Auto"/>
+                    <!-- TODO LO DEMAS -->
+                </Grid.RowDefinitions>
+
+                <Grid x:Name="Primerafila" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="DatosPrincipales" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid x:Name="DatosCliente" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- DATOS DEL CLIENTE -->
+                            <Grid x:Name="ColumnaDatos" Grid.Column="0" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="Nro.Doc:" FontWeight="Bold" Margin="9, 0" Foreground="{DynamicResource Text2}"/>
+                                    <Border Grid.Column="1" CornerRadius="15" BorderThickness="1" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Background="LightYellow" BorderBrush="{DynamicResource BordeTextBox}">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Sombras}" ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                        </Border.Effect>
+                                        <TextBox Margin="10,0" BorderThickness="0 " x:Name="document_number" Foreground="Black" FontSize="15" VerticalAlignment="Center" KeyDown="TxtB_Documento_KeyDown" Background="Transparent"/>
+                                    </Border>
+                                </Grid>
+
+
+                                <Grid Grid.Row="1" Margin="9,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="Cliente:" FontWeight="Bold" Foreground="{DynamicResource Text2}"/>
+                                    <Border Grid.Column="1" CornerRadius="15" BorderThickness="1" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" Margin="23.5,0,0,0">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Sombras}" ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                        </Border.Effect>
+                                        <TextBox Margin="10,0" BorderThickness="0" Grid.Column="1" x:Name="TxtB_Cliente" FontSize="15" VerticalAlignment="Center" Background="Transparent" Foreground="{DynamicResource Text}"/>
+                                    </Border>
+                                </Grid>
+
+                                <Grid Grid.Row="2" Margin="9,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="Dirección:" FontWeight="Bold" Foreground="{DynamicResource Text2}"/>
+                                    <Border Grid.Column="1" CornerRadius="15" BorderThickness="1" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" Margin="9.5,0,0,0">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Sombras}" ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                        </Border.Effect>
+                                        <TextBox BorderThickness="0" Background="Transparent" Foreground="{DynamicResource Text2}" VerticalAlignment="Center" x:Name="TxtB_Direccion" FontSize="15" Margin="10, 0"/>
+                                    </Border>
+                                </Grid>
+
+                                <Grid Grid.Row="3" Margin="9,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="Fijo:" FontWeight="Bold" Foreground="{DynamicResource Text2}"/>
+                                    <Border Grid.Column="1" CornerRadius="15" BorderThickness="1" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" Margin="42.3,0,0,0">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Sombras}" ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                        </Border.Effect>
+                                        <TextBox BorderThickness="0" VerticalAlignment="Center" Background="Transparent" Foreground="{DynamicResource Text}" x:Name="txtTelefono" FontSize="15" Margin="10,0"/>
+                                    </Border>
+                                    <!--<Label Content="WhatsApp:" FontWeight="Bold"/><TextBox Width="90" FontSize="18"/>-->
+                                </Grid>
+
+                                <Grid Grid.Row="4" Margin="9,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="Cel:" FontWeight="Bold" Foreground="{DynamicResource Text2}"/>
+                                    <Border Grid.Column="1" CornerRadius="15" BorderThickness="1" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" Margin="42.3,0,0,0">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Sombras}" ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                        </Border.Effect>
+                                        <TextBox BorderThickness="0" x:Name="TBCelular" VerticalAlignment="Center" FontSize="15" Margin="10, 0" Background="Transparent" Foreground="{DynamicResource Text}"/>
+                                    </Border>
+                                </Grid>
+
+
+                                <Grid Grid.Row="5" Margin="9,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="E-Mail:" FontWeight="Bold" Margin="0, 0, 26.6, 0" Foreground="{DynamicResource Text}"/>
+                                    <Border Grid.Column="1" CornerRadius="15" BorderThickness="1" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="{DynamicResource Sombras}" ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                        </Border.Effect>
+                                        <TextBox BorderThickness="0" x:Name="TBCorreo" FontSize="15" Background="Transparent" Foreground="{DynamicResource Text}" VerticalAlignment="Center" Margin="10, 0"/>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+
+                            <!-- BOTONES SUPERIORES -->
+                            <StackPanel Grid.Column="1" x:Name="SPBotones" Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <!-- Primera fila -->
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                    <Button x:Name="BtnDocVenta" Width="90" Height="100" Margin="5" Background="{DynamicResource BtnDocVentaBackground}" BorderThickness="0" Click="Click_DocVenta">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraDocVenta}" ShadowDepth="0" BlurRadius="15" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="File" Foreground="{DynamicResource BtnDocVentaBorder}" Width="40" Height="40" Margin="0,10"/>
+                                            <TextBlock Text="Doc. Venta" Foreground="{DynamicResource BtnDocVentaBorder}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Button>
+
+
+                                    <Button Width="90" x:Name="btnVentanaProductos" Height="100" Margin="5" Background="{DynamicResource BtnProductosPrincipalBackground}" BorderThickness="0" Click="BtnVentanaProductos_Click">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraProductosPrincipal}" ShadowDepth="0" BlurRadius="15" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="ShoppingBag" Foreground="{DynamicResource BtnProductosPrincipalBorder}" Width="40" Height="40" Margin="0,10"/>
+                                            <TextBlock Text="Productos" Foreground="{DynamicResource BtnProductosPrincipalBorder}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Width="90" Height="100" Margin="5" Background="{DynamicResource BtnClientesBackground}" BorderThickness="0" Click="Click_BtnClientes">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraClientes}" ShadowDepth="0" BlurRadius="15" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="Users" Foreground="{DynamicResource BtnClientesBorder}" Width="40" Height="40" Margin="0,10"/>
+                                            <TextBlock Text="Clientes" Foreground="{DynamicResource BtnClientesBorder}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Width="90" Height="100" Margin="5" Background="{DynamicResource BtnCajaChicaBackground}" BorderThickness="0" Click="BtnCajaChica">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraCajaChica}" ShadowDepth="0" BlurRadius="20" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="Dropbox" Foreground="{DynamicResource BtnCajaChicaBorder}" Width="40" Height="40" Margin="0,10"/>
+                                            <TextBlock Text="Caja Chica" HorizontalAlignment="Center" Foreground="{DynamicResource BtnCajaChicaBorder}" FontWeight="Bold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+
+                                <!-- Segunda fila -->
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Width="90" Height="100" Margin="5" Background="{DynamicResource BtnReemCajaBackground}" BorderThickness="0" Click="Click_ReemCaja" Visibility="Collapsed">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraReemCaja}" ShadowDepth="0" BlurRadius="20" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="Archive" Foreground="{DynamicResource BtnReemCajaBorder}" Width="40" Height="40" Margin="0,10"/>
+                                            <TextBlock Text="Reem. Caja" Foreground="{DynamicResource BtnReemCajaBorder}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Width="90" Height="100" Margin="5" Background="{DynamicResource BtnReenviarBackground}" BorderThickness="0" Click="Click_BtnReenviar">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraReenviar}" ShadowDepth="0" BlurRadius="20" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="Print" Foreground="{DynamicResource BtnReenviarBorder}" Width="40" Height="40" Margin="0,10,0,0"/>
+                                            <TextBlock Text="Consulta de Documentos" TextWrapping="Wrap" Foreground="{DynamicResource BtnReenviarBorder}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Width="90" Height="100" Margin="5" Background="{DynamicResource BtnLimpiarBackground}" BorderThickness="0" Click="BtnLimpiar_Click">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraLimpiar}" ShadowDepth="0" BlurRadius="20" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="Eraser" Foreground="{DynamicResource BtnLimpiarBorder}" Width="40" Height="40" Margin="0,10"/>
+                                            <TextBlock Text="Limpiar" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" Foreground="{DynamicResource BtnLimpiarBorder}"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button x:Name="BtnSalir" Width="90" Height="100" Margin="5" Background="{DynamicResource BtnSalirBackground}" BorderThickness="0" Click="BtnSalir_Click">
+                                        <Button.Effect>
+                                            <DropShadowEffect Color="{DynamicResource SombraSalir}" ShadowDepth="0" BlurRadius="20" Opacity="1"/>
+                                        </Button.Effect>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <fa:ImageAwesome Icon="TimesCircle" Foreground="{DynamicResource BtnSalirBorder}" Width="40" Height="40" Margin="0,10"/>
+                                            <TextBlock Text="Salir" Foreground="{DynamicResource BtnSalirBorder}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel x:Name="SPFila1" Grid.Row="1" Orientation="Horizontal" Margin="0, 10">
+                            <Label Content="Código:" FontWeight="Bold" Margin="10, 0, 19, 0" Foreground="{DynamicResource Text2}"/>
+                            <Border CornerRadius="15" BorderThickness="1" Width="150" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" Margin="5,0,0,0">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{DynamicResource Sombras}" ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                </Border.Effect>
+                                <TextBox x:Name="txBcodart" BorderThickness="0" Margin="10,0" Background="Transparent" Foreground="{DynamicResource Text}" VerticalAlignment="Center" FontSize="18" KeyDown="txBcodart_KeyDown"/>
+                            </Border>
+                            <ComboBox x:Name="CmbMoneda" Width="100" Margin="10,0" SelectedIndex="0"
+                              SelectionChanged="CmbMoneda_SelectionChanged" FontSize="20" FontFamily="Bahnschrift Condensed">
+                            </ComboBox>
+
+                            <CheckBox x:Name="chkAnticipo" Content="ANTICIPO" FontSize="18" FontFamily="Bahnschrift Condensed" VerticalAlignment="Center" Checked="AnticipoCheck" Unchecked="AnticipoCheckF" Margin="5,0"/>
+                            <CheckBox x:Name="chkEntregado" Content="ENTREGADO" FontSize="18" FontFamily="Bahnschrift Condensed" VerticalAlignment="Center" Checked="CheckBox_chkEntregado" Unchecked="CheckBox_chkEntregadoF" Margin="5,0"/>
+
+                            <!-- Switcher de soles y dolares-->
+                            <ToggleButton Grid.Column="0" x:Name="SwitchTema" Width="40" Height="20" HorizontalAlignment="Center" Margin="10,0" VerticalAlignment="Center" Visibility="Collapsed">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Grid Width="40" Height="20">
+                                            <Border x:Name="SwitchBackground" CornerRadius="10" Background="{DynamicResource SwitchTemaBackground}"/>
+
+                                            <!-- Icono Luna a la izquierda -->
+                                            <fa:ImageAwesome x:Name="IconLuna" Icon="MoonOutline" Width="12" Height="12" Margin="2,2,-18,2" Foreground="{DynamicResource SwitchTemaCircle}"/>
+
+                                            <fa:ImageAwesome x:Name="IconSol" Icon="SunOutline" Width="12" Height="12" Margin="2,2,22,2" Spin="True" SpinDuration="2" Foreground="{DynamicResource SwitchTemaCircle}"/>
+
+                                            <Ellipse x:Name="SwitchKnob" Width="16" Height="16" Fill="{DynamicResource SwitchTemaCircle}" Margin="2,2,22,2"/>
+                                        </Grid>
+
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ThicknessAnimation Storyboard.TargetName="SwitchKnob" Storyboard.TargetProperty="Margin" To="20,2,2,2" Duration="0:0:0.2"/>
+                                                            <ColorAnimation Storyboard.TargetName="SwitchBackground" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="White" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ThicknessAnimation Storyboard.TargetName="SwitchKnob" Storyboard.TargetProperty="Margin" To="2,2,20,2" Duration="0:0:0.2"/>
+                                                            <ColorAnimation Storyboard.TargetName="SwitchBackground" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Black" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
+
+                                                <!-- Mostrar sol y ocultar luna cuando está activado -->
+                                                <Setter TargetName="IconSol" Property="Visibility" Value="Visible"/>
+                                                <Setter TargetName="IconLuna" Property="Visibility" Value="Collapsed"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <!-- TODO LO DEMAS-->
+                <Border Grid.Row="1">
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+
+                            <!-- DATAGRID -->
+                            <Border Grid.Row="0" CornerRadius="15" Margin="10,0" Background="{DynamicResource DataGrid}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <DataGrid x:Name="DGTabla" AutoGenerateColumns="False" Background="Transparent" Foreground="{DynamicResource Text}" CanUserAddRows="False" RowHeight="36"
+                          FontSize="34" VerticalAlignment="Top" HeadersVisibility="Column" IsReadOnly="True"
+                          ColumnHeaderHeight="60" BorderThickness="0" CanUserResizeColumns="False" Height="300" FontFamily="Bahnschrift Condensed">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+                                            <!-- Opcional: centra el contenido si quieres -->
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        </Style>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeader}"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Cód." Binding="{Binding Codigo}" Width="0.9*" ElementStyle="{StaticResource CenterCellStyle}" HeaderStyle="{StaticResource CenterHeaderStyle}"/>
+                                        <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="4*" ElementStyle="{StaticResource CenterCellStyle}" HeaderStyle="{StaticResource CenterHeaderStyle}"/>
+                                        <DataGridTextColumn Header="UMD" Binding="{Binding UMD}" Width="80" ElementStyle="{StaticResource CenterCellStyle}" HeaderStyle="{StaticResource CenterHeaderStyle}"/>
+                                        <DataGridTextColumn Header="Cant." Binding="{Binding Cant}" Width="90" ElementStyle="{StaticResource CenterCellStyle}" HeaderStyle="{StaticResource CenterHeaderStyle}"/>
+                                        <DataGridTextColumn Header="Unit." Binding="{Binding Unit, StringFormat={}{0:N6}}" Width="130" ElementStyle="{StaticResource TextoPrecio}" HeaderStyle="{StaticResource CenterHeaderStyle}"/>
+                                        <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:N2}}" Width="100"  ElementStyle="{StaticResource TextoPrecio}" HeaderStyle="{StaticResource CenterHeaderStyle}"/>
+                                        <!-- Nueva columna con 4 botones -->
+                                        <DataGridTemplateColumn Header="Opciones" Width="320" HeaderStyle="{StaticResource CenterHeaderStyle}">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+
+                                                        <!-- Botón Agregar -->
+                                                        <Button Click="BtnAgregar_Click" Width="80" Background="{DynamicResource BotonAceptarBackground}" BorderThickness="2" BorderBrush="{DynamicResource BotonAceptarBorder}">
+                                                            <fa:ImageAwesome Icon="Plus" Foreground="{DynamicResource BotonAceptarBorder}"/>
+                                                        </Button>
+
+                                                        <!-- Botón Restar -->
+                                                        <Button Click="BtnRestar_Click" Width="80" Background="{DynamicResource BtnSalirBackground}" BorderThickness="2" BorderBrush="{DynamicResource BtnSalirBorder}">
+                                                            <fa:ImageAwesome Icon="Minus" Foreground="{DynamicResource BtnSalirBorder}" Height="15"/>
+                                                        </Button>
+
+                                                        <!-- Botón Eliminar -->
+                                                        <Button Click="BtnEliminar_Click" Width="80" Background="{DynamicResource BtnCerrarBackground}" BorderThickness="2" BorderBrush="{DynamicResource BtnCerrarBorder}">
+                                                            <fa:ImageAwesome Icon="TimesCircle" Foreground="{DynamicResource BtnCerrarBorder}" />
+                                                        </Button>
+
+                                                        <!-- Botón Editar -->
+                                                        <Button Click="BtnEditar_Click" Width="80" Background="{DynamicResource BtnCajaChicaBackground}" BorderThickness="2" BorderBrush="{DynamicResource BtnCajaChicaBorder}">
+                                                            <fa:ImageAwesome Icon="Pencil" Foreground="{DynamicResource BtnCajaChicaBorder}" Height="30"/>
+                                                        </Button>
+
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+                            </Border>
+
+                            <!-- TOTALES -->
+                            <Grid x:Name="GFilaTotales" Grid.Row="3" Height="70" VerticalAlignment="Top" Margin="0,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="BtnProductos" HorizontalAlignment="Center" Padding="10" Margin="10,5,0,0" Background="{DynamicResource BtnProductosBackground}" BorderBrush="{DynamicResource BtnProductosBorder}" BorderThickness="2" Click="BtnProductos_Click" Height="60" VerticalAlignment="Top">
+                                    <Button.Effect>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                    </Button.Effect>
+                                    <Grid>
+                                        <fa:ImageAwesome Icon="Cube" Foreground="{DynamicResource BtnProductosBorder}" Width="30" Height="30"/>
+                                        <fa:ImageAwesome Icon="Tag" Foreground="{DynamicResource BtnProductosEtiqueta}" Width="10" Height="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-1,-1"/>
+                                    </Grid>
+                                </Button>
+                                <Button x:Name="BtnBolsas" Grid.Column="1" HorizontalAlignment="Left" Padding="10" Margin="10,15" Background="{DynamicResource BtnBoletaBackground}" BorderBrush="{DynamicResource BtnBoletaBorder}" BorderThickness="2" Click="BtnBolsas_Click" Visibility="Collapsed">
+                                    <Button.Effect>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="5" Opacity="0.8"/>
+                                    </Button.Effect>
+                                    <Grid>
+                                        <fa:ImageAwesome Icon="ShoppingBag" Foreground="{DynamicResource BtnBoletaBorder}" Width="40" Height="40"/>
+                                        <fa:ImageAwesome Icon="Plus" Foreground="{DynamicResource BtnProductosEtiqueta}" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-5,-5"/>
+                                    </Grid>
+                                </Button>
+
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" Height="100" VerticalAlignment="Top">
+                                    <StackPanel Margin="2" Width="150">
+                                        <TextBlock Text="Exonerado" TextAlignment="Center" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                        <TextBlock x:Name="TBExonerado" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="2" Width="150">
+                                        <TextBlock Text="Val. Venta" TextAlignment="Center" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                        <TextBlock x:Name="TBValVenta" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="2" Width="150">
+                                        <TextBlock Text="IGV" TextAlignment="Center" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                        <TextBlock x:Name="TBIGV" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="2" Width="175">
+                                        <TextBlock Text="Prc. Venta" TextAlignment="Center" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                        <TextBlock x:Name="TBPrcVenta" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid x:Name="GFilaSubtotales" Grid.Row="4" Height="70" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,20,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="BtnGaveta" Grid.Column="0" HorizontalAlignment="Left" Padding="10" Margin="10,5" Background="{DynamicResource BtnGavetaBackground}" BorderBrush="{DynamicResource BtnGavetaBorder}" BorderThickness="2" Visibility="Collapsed" Click="Click_BtnGaveta">
+                                    <Grid>
+                                        <!-- Icono de caja -->
+                                        <fa:ImageAwesome Icon="Archive" Width="30" Height="30" Foreground="{DynamicResource BtnGavetaBorder}"/>
+
+                                        <!-- Icono de líneas, simulando cajones -->
+                                        <fa:ImageAwesome Icon="Bars" Width="15" Height="15" Foreground="{DynamicResource BtnGavetaBackground}" Margin="0,8,0,0"/>
+
+                                    </Grid>
+                                </Button>
+                                <Border x:Name="Gaveta" Grid.Column="1" Background="{DynamicResource BtnGavetaBackground}" BorderBrush="{DynamicResource BtnGavetaBorder}" BorderThickness="3" Width="0" Margin="20,10">
+                                    <PasswordBox x:Name="PBGavetaClave" Margin="10,5" BorderBrush="{DynamicResource BtnGavetaBorder}" BorderThickness="2" FontSize="20" KeyDown="KeyDown_PBGavetaClave" Background="{DynamicResource TextBox}" Foreground="{DynamicResource Text2}"/>
+                                </Border>
+                                <StackPanel Grid.Column="3" Orientation="Horizontal" Height="100" VerticalAlignment="Top">
+                                    <!--<StackPanel Margin="2" Width="110">
+                            <TextBlock Text="Pt.Acu" TextAlignment="Center" FontWeight="Bold" FontSize="32"/>
+                            <TextBlock Text="0.00" Background="#c0c0ff" TextAlignment="Right" FontWeight="Bold" FontSize="32"/>
+                        </StackPanel>
+                        <StackPanel Margin="2" Width="110">
+                            <TextBlock Text="Pt.Gan" TextAlignment="Center" FontWeight="Bold" FontSize="32"/>
+                            <TextBlock Text="0.00" Background="LightYellow" TextAlignment="Right" FontWeight="Bold" FontSize="32"/>
+                        </StackPanel>
+                        <StackPanel Margin="2" Width="120">
+                            <TextBlock Text="Pt.Canj" TextAlignment="Center" FontWeight="Bold" FontSize="32"/>
+                            <TextBlock Text="0.00" Background="#ffc0c0" TextAlignment="Right" FontWeight="Bold" FontSize="32"/>
+                        </StackPanel>
+                        <StackPanel Margin="2,2,100,0" Width="110">
+                            <TextBlock Text="Pt.Tot" TextAlignment="Center" FontWeight="Bold" FontSize="32"/>
+                            <TextBlock Text="0.00" Background="#c0ffc0" TextAlignment="Right" FontWeight="Bold" FontSize="32"/>
+                        </StackPanel>-->
+                                    <StackPanel Margin="2" Width="130">
+                                        <TextBlock Text="Tot.Canti" TextAlignment="Center" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                        <TextBlock x:Name="TBTotCanti" Text="0" Background="{DynamicResource TBCant}" TextAlignment="Right" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="2" Width="140">
+                                        <TextBlock Text="B. Plástic" TextAlignment="Center" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                        <TextBlock x:Name="TB_BPlastic" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="2" Width="150">
+                                        <TextBlock Text="Tot. Venta" TextAlignment="Center" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                        <TextBlock x:Name="TBTotVenta" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="26" Foreground="{DynamicResource Text2}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Border x:Name="PanelDerecho" CornerRadius="15,0,0,0" MaxHeight="{Binding ActualHeight, ElementName=SPPrimeraColumna}" Background="{DynamicResource BackgroundPanel}" BorderBrush="{DynamicResource BorderPanel}" Width="480" HorizontalAlignment="Right" BorderThickness="2,2,2,0" Visibility="Visible">
+                    <Grid>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="14,0,0,0" Background="{DynamicResource HeaderPanelDerecho}" >
+                                <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Buscar :" FontSize="15" Margin="15,14,10,14" Foreground="White" FontFamily="Bahnschrift SemiBold"/>
+                                    <Border Grid.Column="1" CornerRadius="15" BorderThickness="1" Background="{DynamicResource TextBox}" Width="150" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{DynamicResource BordeTextBox}">
+                                        <TextBox x:Name="TBArticulo" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource Text}" VerticalContentAlignment="Center" FontSize="15" Padding="10,0" KeyDown="KeyDown_Productos"/>
+                                    </Border>
+                                    <Button Grid.Column="2" Width="30" Margin="8" Background="{DynamicResource BtnBuscarBackground}" BorderThickness="0" Click="BtnBuscarProducto">
+                                        <fa:ImageAwesome Icon="Search" Foreground="{DynamicResource BtnBuscarBorder}" Width="18"/>
+                                    </Button>
+                                    <TextBlock Grid.Column="4" Text="Categoría" FontSize="20" FontWeight="Bold" Margin="15,0,15,0" Foreground="White" VerticalAlignment="Center" FontFamily="Bahnschrift" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </Border>
+
+                            <ListView x:Name="UGProductos" Grid.Row="1" Margin="5,0" 
+          Background="Transparent" BorderThickness="0"
+          
+          ScrollViewer.VerticalScrollBarVisibility="Auto"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          ScrollViewer.PanningMode="VerticalOnly">
+
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Margin="3" BorderThickness="2" Height="100" Width="80" 
+                    BorderBrush="{DynamicResource BordeTextBox}" 
+                    Background="{DynamicResource TextBox}" 
+                    Click="Producto_Click" Style="{x:Null}">
+                                            <StackPanel Orientation="Vertical" Margin="1">
+                                                <TextBlock Text="{Binding des}" TextAlignment="Center"
+                               VerticalAlignment="Center" TextWrapping="Wrap" 
+                               FontWeight="Bold" FontSize="8" Margin="5,0,5,0" 
+                               Foreground="{DynamicResource Text}"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Focusable" Value="False"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListViewItem">
+                                                    <ContentPresenter />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                            </ListView>
+                        </Grid>
+                        <control:CargarGeneral x:Name="EfectoCargarProductos"/>
+                    </Grid>
+                </Border>
+                <Border x:Name="SubPanel" CornerRadius="15,15,0,0" MaxHeight="{Binding ActualHeight, ElementName=SPPrimeraColumna}" Background="{DynamicResource BackgroundPanel}" BorderBrush="{DynamicResource BorderSubPanel}" Width="550" HorizontalAlignment="Right" Panel.ZIndex="10" BorderThickness="2,2,2,0" Visibility="Collapsed">
+                    <Grid>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border CornerRadius="14,13,0,0" Background="{DynamicResource HeaderSubPanel}">
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="BtnCerrarSubpanel" Grid.Column="0" Foreground="White" Background="Red" Width="25" Height="25" HorizontalAlignment="Left" Click="CerrarSubPanel_Click" BorderThickness="0" Margin="15,0">
+                                        <fa:ImageAwesome Icon="ChevronLeft" Width="10" Height="10" Foreground="White"/>
+                                    </Button>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                        <TextBlock Text="Buscar :" FontSize="15" Margin="5,14,10,14" Foreground="White" FontFamily="Bahnschrift SemiBold"/>
+                                        <Border CornerRadius="10" BorderThickness="1" Width="100" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}">
+                                            <TextBox x:Name="TBProducto" Margin="10,0" BorderThickness="0" FontSize="15" VerticalAlignment="Center" CharacterCasing="Upper" Background="Transparent" Foreground="{DynamicResource Text}" KeyDown="KeyDown_BuscarSubProductos"/>
+                                        </Border>
+                                        <Button Width="30" Margin="10" Background="Red" BorderThickness="0" Click="BtnBuscarSubProducto" Cursor="Hand">
+                                            <fa:ImageAwesome Icon="Search" Foreground="White" Width="15"/>
+                                        </Button>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="2" Text="Productos" Foreground="White" FontSize="16" HorizontalAlignment="Right" FontWeight="Bold" Margin="0,10,20,10"/>
+                                </Grid>
+                            </Border>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="BtnAnteriorArticulos" Grid.Column="0" Width="30" BorderThickness="0" Click="BtnAnteriorArticulos_Click" Background="Transparent" IsEnabled="False">
+                                    <fa:ImageAwesome Icon="AngleLeft" Foreground="{DynamicResource Text2}"/>
+                                </Button>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <ListView x:Name="UGSubProductos" Margin="10" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" HorizontalAlignment="Center">
+                                            <ListView.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ListView.ItemsPanel>
+
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Width="86" Height="96" Margin="3,5" BorderThickness="2" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" MouseLeftButtonDown="Click_SubProducto">
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="*"/>
+                                                            </Grid.RowDefinitions>
+
+                                                            <Image Source="{Binding ImagenCargada, IsAsync=True}" Width="50" Height="50" VerticalAlignment="Center" Margin="0,5,0,0"/>
+
+                                                            <Button Grid.Row="0" BorderThickness="0" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Click="VerImagen_Click" Effect="{x:Null}">
+                                                                <fa:ImageAwesome Icon="Eye" Width="20" Height="20" Foreground="{DynamicResource Text2}"/>
+                                                            </Button>
+
+                                                            <TextBlock Grid.Row="1" Text="{Binding Producto.descri}" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" FontSize="8" Foreground="{DynamicResource Text}" Margin="5,0,5,0"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="ListViewItem">
+                                                                <ContentPresenter/>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+
+                                        </ListView>
+                                    </ScrollViewer>
+                                    <TextBlock Grid.Row="1" x:Name="TBPagina" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="25" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}"/>
+                                </Grid>
+                                <Button x:Name="BtnSiguienteArticulos" Grid.Column="2" Width="30" BorderThickness="0" Click="BtnSiguienteArticulos_Click" Background="Transparent">
+                                    <fa:ImageAwesome Icon="AngleRight" Foreground="{DynamicResource Text2}"/>
+                                </Button>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="GDatosInferiores" Grid.Row="1" VerticalAlignment="Top" Background="{DynamicResource ToolStrip}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TxtBCorporacion" Foreground="White" Text="CORPORACION" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="5"/>
+            <TextBlock x:Name="TxtBTurno" Foreground="White" Text="CAJA: " Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            <TextBlock x:Name="TxtBUsuario" Foreground="White" Text="USUARIO: " Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            <TextBlock x:Name="TxtBFecha_Hora" Foreground="White" Text="FECHA / HORA: " Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            <TextBlock x:Name="TxtBTipoCambio" Foreground="White" Text="Tipo de Cambio: " Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="0,0,0,0"/>
+            <TextBlock x:Name="TxtBVersion" Foreground="White" Text="Version : " Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+        </Grid>
+    </Grid>
+</Window>

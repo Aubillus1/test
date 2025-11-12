@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props" Condition="Exists('packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props')" />
+  <Import Project="packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props" Condition="Exists('packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props')" />
+  <Import Project="packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props" Condition="Exists('packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props')" />
+  <Import Project="..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" />
+  <Import Project="..\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props" Condition="Exists('..\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{00FB2E63-3BFA-40E5-8135-AE2F99B1F0E5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HsPvSerAPG</RootNamespace>
+    <AssemblyName>HsPvSerAPG</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>HsPvSerAPG.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="PdfiumViewer">
+      <HintPath>..\packages\PdfiumViewer.2.14.0\lib\net20\PdfiumViewer.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="BoDi, Version=1.5.0.0, Culture=neutral, PublicKeyToken=ff7cd5ea2744b496, processorArchitecture=MSIL">
+      <HintPath>..\packages\BoDi.1.5.0\lib\net45\BoDi.dll</HintPath>
+    </Reference>
+    <Reference Include="Costura, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.6.0.0\lib\netstandard2.0\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Gherkin, Version=19.0.3.0, Culture=neutral, PublicKeyToken=86496cfa5b4a5851, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gherkin.19.0.3\lib\net45\Gherkin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.10\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.3\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="SpecFlow.Internal.Json, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.Internal.Json.1.0.8\lib\net45\SpecFlow.Internal.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=9.0.0.10, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.9.0.10\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.9.0.10\lib\net462\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.9.0.10\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Json, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Json.9.0.10\lib\net462\System.Net.Http.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata, Version=9.0.0.10, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.Metadata.9.0.10\lib\net462\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.9.0.10\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.9.0.10\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TechTalk.SpecFlow, Version=3.9.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.3.9.74\lib\net461\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Utils\Clases\ArticuloViewModel.cs" />
+    <Compile Include="Utils\Clases\ConfigServer.cs" />
+    <Compile Include="Utils\Clases\DetalleDocumento.cs" />
+    <Compile Include="Utils\Clases\ImagenCache.cs" />
+    <Compile Include="Utils\Clases\PagoCalculo.cs" />
+    <Compile Include="Utils\Clases\PagoViewModel.cs" />
+    <Compile Include="Utils\Clases\sisVariables.cs" />
+    <Compile Include="Utils\Clases\StepFillConverter.cs" />
+    <Compile Include="Utils\Clases\TextoMuyPequeño.cs" />
+    <Compile Include="Utils\InverseBoolConverter.cs" />
+    <Compile Include="Vista\CajaChica\Opciones.xaml.cs">
+      <DependentUpon>Opciones.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\CajaChica\RegistroIngreso.xaml.cs">
+      <DependentUpon>RegistroIngreso.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\CajaSeleccion.xaml.cs">
+      <DependentUpon>CajaSeleccion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Clientes\BuscarCliente.xaml.cs">
+      <DependentUpon>BuscarCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Clientes\ConsultaDNI.xaml.cs">
+      <DependentUpon>ConsultaDNI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Clientes\ConsultaRUC.xaml.cs">
+      <DependentUpon>ConsultaRUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Clientes\RegistroClipro.xaml.cs">
+      <DependentUpon>RegistroClipro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Control de Usuario\CargarActualizando.xaml.cs">
+      <DependentUpon>CargarActualizando.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Control de Usuario\CargarGeneral.xaml.cs">
+      <DependentUpon>CargarGeneral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Control de Usuario\CargarSimple.xaml.cs">
+      <DependentUpon>CargarSimple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Control de Usuario\EfectoCargar.xaml.cs">
+      <DependentUpon>EfectoCargar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Doc Venta\Boleta\FormasDePago.xaml.cs">
+      <DependentUpon>FormasDePago.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Doc Venta\Boleta\TipoDePago.xaml.cs">
+      <DependentUpon>TipoDePago.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Doc Venta\Emision.xaml.cs">
+      <DependentUpon>Emision.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\PanelProductos\FRMcantidad.xaml.cs">
+      <DependentUpon>FRMcantidad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\PanelProductos\FRMUnidadDeMedida.xaml.cs">
+      <DependentUpon>FRMUnidadDeMedida.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\PanelProductos\VentanaBolsas.xaml.cs">
+      <DependentUpon>VentanaBolsas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Productos\BusqProducto.xaml.cs">
+      <DependentUpon>BusqProducto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Productos\MostrarImagen.xaml.cs">
+      <DependentUpon>MostrarImagen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\PuntoDeVenta.xaml.cs">
+      <DependentUpon>PuntoDeVenta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Reem Caja\Resumen.xaml.cs">
+      <DependentUpon>Resumen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Reenviar\Anticipo\AppAnticipo.xaml.cs">
+      <DependentUpon>AppAnticipo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Reenviar\Anticipo\EmisionNotaPedido.xaml.cs">
+      <DependentUpon>EmisionNotaPedido.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Reenviar\Cobranza.xaml.cs">
+      <DependentUpon>Cobranza.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Reenviar\EditarDocumento.xaml.cs">
+      <DependentUpon>EditarDocumento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\WhatsappEmergente.xaml.cs">
+      <DependentUpon>WhatsappEmergente.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controlador\ApiReniecController.cs" />
+    <Compile Include="Controlador\CliproController.cs" />
+    <Compile Include="Controlador\CodvenController.cs" />
+    <Compile Include="Controlador\ConsultaImpController.cs" />
+    <Compile Include="Controlador\DocApliController.cs" />
+    <Compile Include="Controlador\PagosController.cs" />
+    <Compile Include="Controlador\PDFcontroller.cs" />
+    <Compile Include="Controlador\TabartController.cs" />
+    <Compile Include="Controlador\TabBanController.cs" />
+    <Compile Include="Controlador\TabBolController.cs" />
+    <Compile Include="Controlador\TabcajaController.cs" />
+    <Compile Include="Controlador\TabcamController.cs" />
+    <Compile Include="Controlador\TabciaController.cs" />
+    <Compile Include="Controlador\TabFacAnticiposController.cs" />
+    <Compile Include="Controlador\TabfacController.cs" />
+    <Compile Include="Controlador\TabgrupController.cs" />
+    <Compile Include="Controlador\Tabpr_artController.cs" />
+    <Compile Include="Controlador\TabRCCController.cs" />
+    <Compile Include="Controlador\TabserController.cs" />
+    <Compile Include="Controlador\TabTarController.cs" />
+    <Compile Include="Controlador\TabusrController.cs" />
+    <Compile Include="Controlador\versionActualController.cs" />
+    <Compile Include="Entidad\AnticipoRequest.cs" />
+    <Compile Include="Entidad\ApiResponseSunat.cs" />
+    <Compile Include="Entidad\Clipro.cs" />
+    <Compile Include="Entidad\Codven.cs" />
+    <Compile Include="Entidad\ConsultaImp.cs" />
+    <Compile Include="Entidad\DocApli.cs" />
+    <Compile Include="Entidad\Pagos.cs" />
+    <Compile Include="Entidad\PersonaReniec.cs" />
+    <Compile Include="Entidad\Producto.cs" />
+    <Compile Include="Entidad\Tabart.cs" />
+    <Compile Include="Entidad\TabBan.cs" />
+    <Compile Include="Entidad\TabBol.cs" />
+    <Compile Include="Entidad\Tabcaja.cs" />
+    <Compile Include="Entidad\Tabcam.cs" />
+    <Compile Include="Entidad\Tabcia.cs" />
+    <Compile Include="Entidad\TabFac.cs" />
+    <Compile Include="Entidad\TabFacAnticipos.cs" />
+    <Compile Include="Entidad\Tabgrup.cs" />
+    <Compile Include="Entidad\TablaUMD.cs" />
+    <Compile Include="Entidad\Tabpr_art.cs" />
+    <Compile Include="Entidad\TabRCC.cs" />
+    <Compile Include="Entidad\Tabser.cs" />
+    <Compile Include="Entidad\TabTar.cs" />
+    <Compile Include="Entidad\Tabusr.cs" />
+    <Compile Include="Entidad\Versiontab.cs" />
+    <Compile Include="Entidad\WhatsAppService.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Temas\TemaClaro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Temas\TemaOscuro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\CajaChica\Opciones.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\CajaChica\RegistroIngreso.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\CajaSeleccion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Clientes\BuscarCliente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Clientes\ConsultaDNI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Clientes\ConsultaRUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Clientes\RegistroClipro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Control de Usuario\CargarActualizando.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Control de Usuario\CargarGeneral.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Control de Usuario\CargarSimple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Control de Usuario\EfectoCargar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Doc Venta\Boleta\FormasDePago.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Doc Venta\Boleta\TipoDePago.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Doc Venta\Emision.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\PanelProductos\FRMcantidad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\PanelProductos\FRMUnidadDeMedida.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\PanelProductos\VentanaBolsas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Productos\BusqProducto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Productos\MostrarImagen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\PuntoDeVenta.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Reem Caja\Resumen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Reenviar\Anticipo\AppAnticipo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Reenviar\Anticipo\EmisionNotaPedido.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Reenviar\Cobranza.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\Reenviar\EditarDocumento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vista\WhatsappEmergente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="server.hs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utils\Clases\CMDcaja.txt" />
+    <Resource Include="Utils\Imagenes\1.jpg" />
+    <Resource Include="Utils\Imagenes\2.jpg" />
+    <Resource Include="Utils\Imagenes\3.jpg" />
+    <Resource Include="Utils\Imagenes\americanexpress_logo.png" />
+    <Resource Include="Utils\Imagenes\bancofallabela_logo.png" />
+    <Resource Include="Utils\Imagenes\bancopichincha_logo.png" />
+    <Resource Include="Utils\Imagenes\bancoripley_logo.png" />
+    <Resource Include="Utils\Imagenes\bancostandanter_logo.png" />
+    <Resource Include="Utils\Imagenes\bbva_logo.png" />
+    <Resource Include="Utils\Imagenes\bcp_logo.png" />
+    <Resource Include="Utils\Imagenes\citibank_logo.png" />
+    <Resource Include="Utils\Imagenes\default.png" />
+    <Resource Include="Utils\Imagenes\dinersclub_logo.png" />
+    <Resource Include="Utils\Imagenes\discovercard_logo.png" />
+    <Resource Include="Utils\Imagenes\interbank_logo.png" />
+    <Resource Include="Utils\Imagenes\jcb_logo.png" />
+    <Resource Include="Utils\Imagenes\logo.png" />
+    <Resource Include="Utils\Imagenes\logo_pequeño.png" />
+    <Resource Include="Utils\Imagenes\mastercard_logo.png" />
+    <Resource Include="Utils\Imagenes\mibanco_logo.png" />
+    <Resource Include="Utils\Imagenes\noimagen.jpg" />
+    <Resource Include="Utils\Imagenes\plin_logo.png" />
+    <Resource Include="Utils\Imagenes\scotiabank_logo.png" />
+    <Resource Include="Utils\Imagenes\sunat logo.png" />
+    <Resource Include="Utils\Imagenes\tarjetaoh_logo.png" />
+    <Resource Include="Utils\Imagenes\unionpay_logo.png" />
+    <Resource Include="Utils\Imagenes\visa_logo.png" />
+    <Resource Include="Utils\Imagenes\yape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vista\reniec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\SpecFlow.3.9.74\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.9.74\build\SpecFlow.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SpecFlow.3.9.74\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.3.9.74\build\SpecFlow.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.8.2\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.8.2\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets'))" />
+    <Error Condition="!Exists('packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props'))" />
+    <Error Condition="!Exists('packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\PdfiumViewer.Native.x86.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.no_v8-no_xfa.props'))" />
+    <Error Condition="!Exists('packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\PdfiumViewer.Native.x86_64.no_v8-no_xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.no_v8-no_xfa.props'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Fody.6.8.2\build\Fody.targets" Condition="Exists('..\packages\Fody.6.8.2\build\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
+  <Target Name="CopyPdfium" AfterTargets="Build">
+    <ItemGroup>
+      <!-- Ruta de origen del pdfium.dll -->
+      <PdfiumFiles Include="..\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\Build\x86\PdfiumViewer.dll" />
+    </ItemGroup>
+    <!-- 🔹 Copiarlo dentro de la carpeta Resources del Release -->
+    <Copy SourceFiles="@(PdfiumFiles)" DestinationFolder="$(OutDir)\Resources" SkipUnchangedFiles="true" />
+  </Target>
+  <ItemGroup>
+    <None Include="Resources\PdfiumViewer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="packages\PdfiumViewer.2.13.0.0\lib\net20\nl\PdfiumViewer.resources.dll" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CosturaUnmanaged32Assemblies>PdfiumViewer.dll</CosturaUnmanaged32Assemblies>
+  </PropertyGroup>
+</Project>

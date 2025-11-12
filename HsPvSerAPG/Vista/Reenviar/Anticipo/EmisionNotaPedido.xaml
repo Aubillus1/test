@@ -1,0 +1,81 @@
+﻿<Window x:Class="HsPvSerAPG.Vista.Reenviar.Anticipo.EmisionNotaPedido"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HsPvSerAPG.Vista.Reenviar.Anticipo"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        Title="EMISION DE NOTA PEDIDO - PUNTO DE VENTA" Height="600" Width="850" Background="{DynamicResource GradientBackground}" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Icon="/Utils/Imagenes/logo.png" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Código de Cliente: " FontSize="20" FontWeight="Bold" FontFamily="Bahnschrift Condensed" VerticalAlignment="Center"/>
+            <Border Grid.Column="1" BorderBrush="{DynamicResource BordeTextBox}" Background="{DynamicResource TextBox}" BorderThickness="2" Height="40" CornerRadius="10">
+                <TextBox x:Name="NumDoc" IsReadOnly="True" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="0" FontSize="33" Height="40" VerticalAlignment="Center" Margin="10,0" FontFamily="Bahnschrift Condensed"/>
+            </Border>
+            <Border Grid.Column="2" BorderBrush="{DynamicResource BordeTextBox}" Background="{DynamicResource TextBox}" BorderThickness="2" Height="40" Margin="10,0" CornerRadius="10">
+                <TextBox x:Name="Doc" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="0" FontSize="33" Margin="10,0" Height="40" VerticalAlignment="Center" FontFamily="Bahnschrift Condensed"/>
+            </Border>
+            <Button Grid.Column="3" Background="{DynamicResource BtnBuscarBackground}" BorderBrush="{DynamicResource BtnBuscarBorder}" BorderThickness="2" Margin="5,0" Click="Click_BtnBuscar">
+                <StackPanel Orientation="Vertical">
+                    <fa:ImageAwesome Icon="Search" Foreground="{DynamicResource BtnBuscarBorder}" Width="50"/>
+                    <TextBlock Text="Buscar" FontSize="30" Foreground="{DynamicResource BtnBuscarBorder}" VerticalAlignment="Center" FontFamily="Bahnschrift Condensed"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <TextBlock Grid.Row="1" Text="Documentos Encontrados" FontSize="25" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}" Margin="0,10"/>
+
+        <DataGrid Grid.Row="2" IsReadOnly="True" x:Name="DGEmision" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" SelectionChanged="DGEmision_SelectionChanged" FontFamily="Bahnschrift Condensed" FontSize="20" SelectionMode="Single" SelectionUnit="FullRow" MouseDoubleClick="DG_MouseDoubleClick" PreviewKeyDown="DGEmision_PreviewKeyDown">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#869FBA"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Num. Doc." Width="110" Binding="{Binding numdoc}"/>
+                <DataGridTextColumn Header="Fecha" Width="90" Binding="{Binding fecha}" />
+                <DataGridTextColumn Header="Raz. Soc." Width="2*" Binding="{Binding razsoc}"/>
+                <DataGridTextColumn Header="T/M" Width="100" Binding="{Binding NombreMoneda}"/>
+                <DataGridTextColumn Header="Monto" Width="*" Binding="{Binding total}" ElementStyle="{StaticResource TextoPrecio}"/>
+                <DataGridTextColumn Header="Saldo" Width="*" Binding="{Binding salant}" ElementStyle="{StaticResource TextoPrecio}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Row="3" Text="Documentos a los que se les aplico el anticipo" FontSize="25" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift Condensed" Foreground="{DynamicResource Text}" Margin="0,10"/>
+        <DataGrid x:Name="DGDocApli" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" Grid.Row="4" FontFamily="Bahnschrift Condensed" FontSize="20" CanUserDeleteRows="False" SelectionMode="Single">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#869FBA"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Num. Doc." Width="110" Binding="{Binding numdoc}"/>
+                <DataGridTextColumn Header="Fecha" Width="90" Binding="{Binding fecha}"/>
+                <DataGridTextColumn Header="Raz. Soc." Width="2*" Binding="{Binding razsoc}"/>
+                <DataGridTextColumn Header="T/M" Width="100" Binding="{Binding NombreMoneda}"/>
+                <DataGridTextColumn Header="Monto" Width="*" Binding="{Binding total}"/>
+                <DataGridTextColumn Header="Saldo" Width="*" Binding="{Binding saldo}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

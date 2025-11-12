@@ -1,0 +1,81 @@
+﻿<Window x:Class="HsPvSerAPG.Vista.PanelProductos.FRMUnidadDeMedida"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HsPvSerAPG.Vista.PanelProductos"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Loaded="DgUMDFocus"
+        KeyDown="Window_KeyDown" PreviewKeyDown="Window_KeyDown"
+        Title="Precios" d:Height="550" d:Width="1200" Width="1200" Height="550" Background="{DynamicResource UMDBackground}" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Icon="/Utils/Imagenes/logo.png">
+    <Window.InputBindings>
+    </Window.InputBindings>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Unidades de Medida" FontSize="40" Foreground="{DynamicResource Text2}" FontFamily="Bahnschrift Condensed"/>
+        <Border Grid.Row="1" CornerRadius="5" Background="{DynamicResource GridUMD}">
+            <DataGrid x:Name="DGUMD" MouseDoubleClick="Click_Columna" AutoGenerateColumns="False" CanUserAddRows="False" HeadersVisibility="Column" IsReadOnly="True">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="{DynamicResource GridUMD}"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Cód." Width="0.4*" Binding="{Binding Codigo}"/>
+                    <DataGridTextColumn Header="UDM" Width="*" Binding="{Binding Desuni}"/>
+                    <DataGridTextColumn Header="Precio Publi. S/." Width="*" Binding="{Binding precioSOLES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Publi. $" Width="*" Binding="{Binding precioDOLARES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Mayor S/." Width="*" Binding="{Binding precio_mayorSOLES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Mayor $" Width="*" Binding="{Binding precio_mayorDOLARES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Menor S/." Width="*" Binding="{Binding precio_minSOLES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Menor $" Width="*" Binding="{Binding precio_minDOLARES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Pase SF S/." Width="*" Binding="{Binding precio_paseSOLES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Pase SF $" Width="*" Binding="{Binding precio_paseDOLARES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Pase CF S/." Width="*" Binding="{Binding precio_pase1SOLES, StringFormat={}{0:N6}}"/>
+                    <DataGridTextColumn Header="Precio Pase CF $" Width="*" Binding="{Binding precio_pase1DOLARES, StringFormat={}{0:N6}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="{DynamicResource Text2}"/>
+                    <Setter Property="Background" Value="{DynamicResource TextBox}"/>
+                    <Setter Property="Margin" Value="10,5"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="TextAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="FontFamily" Value="Bahnschrift Condensed"/>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="F1: Precio Publi."/>
+            <TextBlock Grid.Column="1" Text="F2: Precio Mayor"/>
+            <TextBlock Grid.Column="2" Text="F3: Precio Menor"/>
+            <TextBlock Grid.Column="3" Text="F4: Precio Pase SF"/>
+            <TextBlock Grid.Column="5" Text="F5: Precio Pase CF"/>
+        </Grid>
+
+    </Grid>
+</Window>

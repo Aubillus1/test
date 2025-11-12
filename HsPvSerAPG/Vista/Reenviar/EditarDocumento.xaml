@@ -1,0 +1,263 @@
+﻿<Window x:Class="HsPvSerAPG.Vista.Reenviar.EditarDocumento"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:control="clr-namespace:HsPvSerAPG.Vista.Control_de_Usuario"
+        xmlns:local="clr-namespace:HsPvSerAPG.Vista.Reenviar"
+        xmlns:utils="clr-namespace:HsPvSerAPG.Utilis"
+        mc:Ignorable="d" Icon="/Utils/Imagenes/logo.png"
+        Title="Editar Documento" Height="600" Width="1040" WindowStartupLocation="CenterScreen" Background="{DynamicResource GradientBackground}" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+    <Window.Resources>
+        <utils:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!-- Cabecera -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,0">
+                    <TextBlock Text="Sucursal: " Foreground="{DynamicResource Text}" FontSize="26" FontFamily="Bahnschrift Condensed"/>
+                    <Border CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                        <TextBlock x:Name="TBSucursal" Width="200" Background="Transparent" Margin="10,0" Text="" FontSize="27" VerticalAlignment="Bottom" FontFamily="Bahnschrift Condensed"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0">
+                    <TextBlock Text="Documento: " FontSize="28" FontFamily="Bahnschrift Condensed"/>
+                    <Border CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1" Margin="5,0">
+                        <TextBlock Width="50" Background="Transparent" Margin="10,0" Text="DEV" FontSize="25" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Bahnschrift Condensed"/>
+                    </Border>
+                    <Border  CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1" Margin="5,0">
+                        <TextBlock x:Name="TBNumeroSerie" Width="50" Background="Transparent" Margin="10,0" Text="NUM" FontSize="25" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Bahnschrift Condensed"/>
+                    </Border>
+                    <Border CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1" Margin="5,0">
+                        <TextBox Width="50" Background="Transparent" Margin="10,0" BorderThickness="0" Text="?" FontSize="25" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Bahnschrift Codensed"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10,0">
+                    <TextBlock Text="Fecha: " Foreground="{DynamicResource Text}" FontSize="28" FontFamily="Bahnschrift Condensed"/>
+                    <DatePicker x:Name="DPFechaInicio" Background="{DynamicResource TextBox}" FontFamily="Bahnschrift Condensed" BorderBrush="{DynamicResource BordeTextBox}" Foreground="{DynamicResource Text}" 
+                            SelectedDate="{x:Static sys:DateTime.Now}" FontSize="25" Margin="10,0,0,0" Width="150"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Documento de referencia -->
+            <GroupBox Grid.Row="1" Header="Documento de Referencia" BorderBrush="{DynamicResource Text}" BorderThickness="1" FontSize="18" FontFamily="Bahnschrift Condensed">
+                <Grid Margin="10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="T/D.:" FontSize="20" Margin="61,0,0,0"/>
+                            <Border Margin="0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock Margin="5,0" Text="N/D" Width="100" Background="Transparent" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            </Border>
+                            <TextBlock Margin="5,0" Text="Número:" FontSize="20"/>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBDoc" Background="Transparent" Width="50" Margin="10,0" FontSize="21" Text="" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBNumDoc" Background="Transparent" Width="172" Margin="10,0" FontSize="21" Text="" VerticalAlignment="Bottom" TextAlignment="Right"/>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Fecha:" FontSize="18"/>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBFecha" Background="Transparent" Width="120" Margin="10,0" FontSize="21" Text="" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            </Border>
+                            <TextBlock Text="T/M:" FontSize="18"/>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBTipMon" Background="Transparent" Width="30" Margin="10,0" FontSize="21" Text="" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="Razón Social:" FontSize="20"/>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBNumRazSocial" Background="Transparent" Width="50" Margin="10,0" Text="3814" VerticalAlignment="Bottom"/>
+                            </Border>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBRazSocial" Background="Transparent" Width="429" Margin="10,0" Text="" VerticalAlignment="Bottom"/>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Vendedor:" FontSize="20"/>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBNumVendedor" Background="Transparent" Width="30" Margin="10,0" FontSize="18" Text="" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                                <TextBlock x:Name="TBVendedor" Background="Transparent" Width="109" Margin="10,0" FontSize="18" Text="" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Motivo:" Foreground="{DynamicResource Text}" FontSize="20"/>
+                        <Border Grid.Column="1" Margin="5,0" CornerRadius="12" Background="{DynamicResource TextBox}" BorderBrush="{DynamicResource BordeTextBox}" BorderThickness="1">
+                            <TextBox x:Name="TBMotivo" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource Text}" Margin="10,0" FontSize="18" Text="" VerticalAlignment="Bottom"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+
+            <!-- Detalle -->
+            <GroupBox Grid.Row="2" Header="Detalle de Documento" BorderBrush="{DynamicResource Text}" BorderThickness="1" FontSize="18" FontFamily="Bahnschrift Condensed">
+                <DataGrid x:Name="dataGridDetalle"  RowEditEnding="dataGridDetalle_RowEditEnding" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" FontSize="18" FontFamily="Bahnschrift Condensed" Background="{DynamicResource DataGrid}" CanUserResizeColumns="False" HeadersVisibility="Column">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Text}"/>
+                            <!-- Opcional: centra el contenido si quieres -->
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeader}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Background" Value="#869FBA"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="20"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header=" " Width="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox VerticalAlignment="Center" Click="Click_DGCheckBox" IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Código" Width="100" IsReadOnly="True" Binding="{Binding Codigo}" />
+                        <DataGridTextColumn Header="Descripción" Width="*" IsReadOnly="True" Binding="{Binding Producto}" />
+                        <!--<DataGridTemplateColumn Header="UDM" Width="100" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox
+                                    VerticalAlignment="Center"
+                                    ItemsSource="{Binding UDMList}" 
+                                    SelectedItem="{Binding desuni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectionChanged="ComboBoxUMD_SelectionChanged"
+                                    DisplayMemberPath="Nombre" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                        <DataGridTextColumn Header="UDM" Width="100" Binding="{Binding desuni}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Cantidad" Width="80" Binding="{Binding Cantidad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{DynamicResource Text}" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.EditingElementStyle>
+                                <Style TargetType="TextBox">
+                                    <EventSetter Event="PreviewKeyDown" Handler="TextBox_PreviewKeyDown"/>
+                                    <Setter Property="IsReadOnly" Value="{Binding IsSelected, Converter={StaticResource InverseBoolConverter}}" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.EditingElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Header="Unit." Width="100" Binding="{Binding Precio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource TextoPrecio}" IsReadOnly="True"/>
+
+                        <DataGridTextColumn Header="Monto" Width="100" Binding="{Binding Total, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource TextoPrecio}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <!-- Totales -->
+            <Grid Grid.Row="3" Margin="10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="600"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Height="120" Background="{DynamicResource BtnCerrarBackground}" BorderBrush="{DynamicResource BtnCerrarBorder}" BorderThickness="3" Margin="2,0" Click="Click_BtnEliminar">
+                        <StackPanel>
+                            <fa:ImageAwesome Icon="Close" Foreground="{DynamicResource BtnCerrarBorder}" Height="60"/>
+                            <TextBlock Text="Eliminar" Foreground="{DynamicResource BtnCerrarBorder}" FontSize="40" FontFamily="Bahnschrift Condensed"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="1" Height="120" Background="{DynamicResource BtnCurrentBackground}" BorderBrush="{DynamicResource BtnCurrentBorder}" BorderThickness="3" Margin="2,0" Click="BTNGUARDAR">
+                        <StackPanel>
+                            <fa:ImageAwesome Icon="Save" Foreground="{DynamicResource BtnCurrentBorder}" Height="60"/>
+                            <TextBlock Text="Guardar" Foreground="{DynamicResource BtnCurrentBorder}" FontSize="40" FontFamily="Bahnschrift Condensed"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="2" Height="120" Background="{DynamicResource BtnSalirBackground}" BorderBrush="{DynamicResource BtnSalirBorder}" BorderThickness="3" Margin="2,0" Click="Click_BtnSalir">
+                        <StackPanel>
+                            <fa:ImageAwesome Icon="TimesCircle" Foreground="{DynamicResource BtnSalirBorder}" Height="60"/>
+                            <TextBlock Text="Salir" Foreground="{DynamicResource BtnSalirBorder}" FontSize="40" TextAlignment="Center" FontFamily="Bahnschrift Condensed"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
+                        <StackPanel Margin="2" Width="100">
+                            <TextBlock Text="Valor Bruto" TextAlignment="Center" FontWeight="Bold" FontSize="17" Foreground="{DynamicResource Text}"/>
+                            <TextBlock x:Name="txtValorBruto" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Margin="2" Width="100">
+                            <TextBlock Text="Dscto." TextAlignment="Center" FontWeight="Bold" FontSize="18" Foreground="{DynamicResource Text}"/>
+                            <TextBlock x:Name="txtDescuento" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Margin="2" Width="100">
+                            <TextBlock Text="Val. Venta" TextAlignment="Center" FontWeight="Bold" FontSize="18" Foreground="{DynamicResource Text}"/>
+                            <TextBlock x:Name="txtValorVenta" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="18"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
+                        <StackPanel Margin="2" Width="100">
+                            <TextBlock Text="I.G.V." TextAlignment="Center" FontWeight="Bold" FontSize="18" Foreground="{DynamicResource Text}"/>
+                            <TextBlock x:Name="txtIGV" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Margin="2" Width="100">
+                            <TextBlock Text="ICBPER" TextAlignment="Center" FontWeight="Bold" FontSize="18" Foreground="{DynamicResource Text}"/>
+                            <TextBlock Text="0.00" Background="{DynamicResource TBCant}" TextAlignment="Right" FontWeight="Bold" FontSize="18"/>
+                        </StackPanel>
+                        <StackPanel Margin="2" Width="100">
+                            <TextBlock Text="Total" TextAlignment="Center" FontWeight="Bold" FontSize="18" Foreground="{DynamicResource Text}"/>
+                            <TextBlock x:Name="txtImporteTotal" Text="0.00" Background="{DynamicResource TBTotales}" TextAlignment="Right" FontWeight="Bold" FontSize="18"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <control:CargarGeneral x:Name="cargar" Visibility="Collapsed"/>
+    </Grid>
+</Window>
