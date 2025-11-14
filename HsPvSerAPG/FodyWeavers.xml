@@ -1,8 +1,19 @@
 ﻿<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
 
-  <!-- Embebe Costura -->
-  <Costura IncludeDebugSymbols="false"
-           IncludeAssemblies="PdfiumViewer"
-           Unmanaged32Assemblies="PdfiumViewer.dll" />
+  <Costura IncludeDebugSymbols="false">
+    <!-- Ensamblados que queremos incrustar explícitamente -->
+    <IncludeAssemblies>
+      PdfiumViewer
+      System.Memory
+      System.Runtime.CompilerServices.Unsafe
+      System.Buffers
+    </IncludeAssemblies>
+
+    <!-- Nativos -->
+    <Unmanaged32Assemblies>
+      PdfiumViewer.dll
+    </Unmanaged32Assemblies>
+  </Costura>
+
 </Weavers>

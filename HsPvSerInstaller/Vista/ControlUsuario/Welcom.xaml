@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Actualizar.Vista.ControlUsuario"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
-             d:Width="824" d:Height="500" 
+             d:Width="424" d:Height="300" 
              Background="{DynamicResource Background}" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 

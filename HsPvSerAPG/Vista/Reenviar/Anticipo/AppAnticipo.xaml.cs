@@ -162,22 +162,35 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
             {
                 using (var document = PdfiumViewer.PdfDocument.Load(pdfPath))
                 {
-                    var pageSize = document.PageSizes[0];
-
-                    int width = (int)(pageSize.Width / 70 * 90);
-                    int height = (int)(pageSize.Height / 70 * 90);
-
                     using (var printDocument = document.CreatePrintDocument())
                     {
-                        var paperSize = new PaperSize("PDFPage", width, height);
-                        printDocument.DefaultPageSettings.PaperSize = paperSize;
+                        // Configurar impresora predeterminada
+                        var printerSettings = new PrinterSettings
+                        {
+                            PrinterName = new PrinterSettings().PrinterName, // predeterminada del sistema
+                            Copies = 1
+                        };
 
-                        //  Márgenes
-                        printDocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
-                        printDocument.OriginAtMargins = false;
+                        var pageSettings = new PageSettings(printerSettings)
+                        {
+                            Margins = new Margins(0, 0, 0, 0)
+                        };
 
-                        //  Evitar cuadro de diálogo
+                        //  Aplicar configuraciones a la impresión
+                        printDocument.PrinterSettings = printerSettings;
+                        printDocument.DefaultPageSettings = pageSettings;
                         printDocument.PrintController = new StandardPrintController();
+
+                        // Centrar automáticamente según tamaño del papel
+                        printDocument.PrintPage += (s, e) =>
+                        {
+                            var pageSize = document.PageSizes[0];
+                            int contenidoAncho = (int)(pageSize.Width / 72f * 100f); // centésimas de pulgada
+                            int anchoPapel = e.PageBounds.Width;
+
+                            float offsetX = (anchoPapel - contenidoAncho) / 2f;
+                            if (offsetX > 0) e.Graphics.TranslateTransform(offsetX, 0);
+                        };
 
                         printDocument.Print();
                     }
@@ -185,7 +198,7 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
+                System.Windows.MessageBox.Show(
                     $"Error al imprimir PDF: {ex.Message}",
                     "Error",
                     MessageBoxButton.OK,
@@ -193,7 +206,6 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
                 );
             }
         }
-
         private async void BtnClick_Guardar(object sender, RoutedEventArgs e)
         {
             if (@switch)

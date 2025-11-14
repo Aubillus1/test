@@ -62,7 +62,7 @@
                         </Image.RenderTransform>
                     </Image>
                     <TextBlock Foreground="White" VerticalAlignment="Center" Margin="10,0" FontWeight="Bold" FontSize="16">
-                    Login - HspvSerWPF
+                    Login - HspvSerWPF version 4
                     </TextBlock>
                 </StackPanel>
                 <ToggleButton Grid.Column="2" x:Name="SwitchTema" Width="40" Height="20" HorizontalAlignment="Center" Margin="10,0" VerticalAlignment="Center" Visibility="Collapsed">
