@@ -106,11 +106,11 @@
     <Compile Include="Controlador\MantenimientoController.cs" />
     <Compile Include="Controlador\ModulosController.cs" />
     <Compile Include="Controlador\VersionController.cs" />
-    <Compile Include="Vista\ControlUsuario\Carga.xaml.cs">
-      <DependentUpon>Carga.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vista\ControlUsuario\Welcom.xaml.cs">
       <DependentUpon>Welcom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Temas\TemaClaro.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +131,10 @@
     <Compile Include="Vista\ControlUsuario\Welcom.xaml.cs">
       <DependentUpon>Welcom.xaml</DependentUpon>
     </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

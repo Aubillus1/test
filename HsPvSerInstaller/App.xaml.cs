@@ -8,10 +8,31 @@ using System.Windows;
 
 namespace Actualizar
 {
-    /// <summary>
-    /// Lógica de interacción para App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            this.Dispatcher.InvokeAsync(() =>
+            {
+                // Obtener la ventana creada automáticamente por WPF
+                var win = Current.MainWindow;
+
+                if (win != null)
+                {
+                    win.Width = 50;  
+
+                    win.Height =60;  
+
+                    win.ResizeMode = ResizeMode.NoResize;
+                    win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                    // (Opcional) Sin borde
+                    win.WindowStyle = WindowStyle.None;
+                }
+            });
+        }
     }
 }
+

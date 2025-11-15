@@ -202,6 +202,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CopiesDialog.xaml.cs">
+      <DependentUpon>CopiesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Clases\ArticuloViewModel.cs" />
     <Compile Include="Utils\Clases\ConfigServer.cs" />
     <Compile Include="Utils\Clases\DetalleDocumento.cs" />
@@ -293,6 +296,10 @@
     <Compile Include="Vista\WhatsappEmergente.xaml.cs">
       <DependentUpon>WhatsappEmergente.xaml</DependentUpon>
     </Compile>
+    <Page Include="CopiesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

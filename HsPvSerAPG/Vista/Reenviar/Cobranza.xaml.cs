@@ -167,15 +167,22 @@ namespace HsPvSerAPG.Vista
         {
             try
             {
+                var dlg = new CopiesDialog();
+                dlg.Owner = Application.Current.MainWindow;
+
+                bool? result = dlg.ShowDialog();
+                if (result != true) return;
+
+                int copias = dlg.Copias;
+
                 using (var document = PdfiumViewer.PdfDocument.Load(pdfPath))
                 {
                     using (var printDocument = document.CreatePrintDocument())
                     {
-                        // Configurar impresora predeterminada
                         var printerSettings = new PrinterSettings
                         {
-                            PrinterName = new PrinterSettings().PrinterName, // predeterminada del sistema
-                            Copies = 1
+                            PrinterName = new PrinterSettings().PrinterName,
+                            Copies = (short)copias
                         };
 
                         var pageSettings = new PageSettings(printerSettings)
@@ -183,21 +190,9 @@ namespace HsPvSerAPG.Vista
                             Margins = new Margins(0, 0, 0, 0)
                         };
 
-                        //  Aplicar configuraciones a la impresión
                         printDocument.PrinterSettings = printerSettings;
                         printDocument.DefaultPageSettings = pageSettings;
                         printDocument.PrintController = new StandardPrintController();
-
-                        // Centrar automáticamente según tamaño del papel
-                        printDocument.PrintPage += (s, e) =>
-                        {
-                            var pageSize = document.PageSizes[0];
-                            int contenidoAncho = (int)(pageSize.Width / 72f * 100f); // centésimas de pulgada
-                            int anchoPapel = e.PageBounds.Width;
-
-                            float offsetX = (anchoPapel - contenidoAncho) / 2f;
-                            if (offsetX > 0) e.Graphics.TranslateTransform(offsetX, 0);
-                        };
 
                         printDocument.Print();
                     }
@@ -205,7 +200,7 @@ namespace HsPvSerAPG.Vista
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(
+                MessageBox.Show(
                     $"Error al imprimir PDF: {ex.Message}",
                     "Error",
                     MessageBoxButton.OK,

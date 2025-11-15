@@ -67,7 +67,7 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
                 TBImporteSOLES.Text = TBImporteSOLES.Text;
                 TBImporteDOLARES.Text = TBImporteDOLARES.Text;
             }
-            
+
         }
 
         private void Calcular()
@@ -90,8 +90,8 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
 
             if (result == MessageBoxResult.Yes)
             {
-                this.Close(); 
-                
+                this.Close();
+
             }
         }
 
@@ -137,7 +137,7 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
                     decimal dolares;
                     if (decimal.TryParse(TBImporteDOLARES.Text, out dolares))
                     {
-                        
+
                         decimal tipoCambio = Convert.ToDecimal(TBTipCam.Text);
                         decimal soles = tipoCambio > 0 ? Math.Round(dolares * tipoCambio, 6) : 0;
                         TBImporteSOLES.Text = soles.ToString("F2");
@@ -160,15 +160,22 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
         {
             try
             {
+                var dlg = new CopiesDialog();
+                dlg.Owner = Application.Current.MainWindow;
+
+                bool? result = dlg.ShowDialog();
+                if (result != true) return;
+
+                int copias = dlg.Copias;
+
                 using (var document = PdfiumViewer.PdfDocument.Load(pdfPath))
                 {
                     using (var printDocument = document.CreatePrintDocument())
                     {
-                        // Configurar impresora predeterminada
                         var printerSettings = new PrinterSettings
                         {
-                            PrinterName = new PrinterSettings().PrinterName, // predeterminada del sistema
-                            Copies = 1
+                            PrinterName = new PrinterSettings().PrinterName,
+                            Copies = (short)copias
                         };
 
                         var pageSettings = new PageSettings(printerSettings)
@@ -176,21 +183,9 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
                             Margins = new Margins(0, 0, 0, 0)
                         };
 
-                        //  Aplicar configuraciones a la impresión
                         printDocument.PrinterSettings = printerSettings;
                         printDocument.DefaultPageSettings = pageSettings;
                         printDocument.PrintController = new StandardPrintController();
-
-                        // Centrar automáticamente según tamaño del papel
-                        printDocument.PrintPage += (s, e) =>
-                        {
-                            var pageSize = document.PageSizes[0];
-                            int contenidoAncho = (int)(pageSize.Width / 72f * 100f); // centésimas de pulgada
-                            int anchoPapel = e.PageBounds.Width;
-
-                            float offsetX = (anchoPapel - contenidoAncho) / 2f;
-                            if (offsetX > 0) e.Graphics.TranslateTransform(offsetX, 0);
-                        };
 
                         printDocument.Print();
                     }
@@ -198,7 +193,7 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(
+                MessageBox.Show(
                     $"Error al imprimir PDF: {ex.Message}",
                     "Error",
                     MessageBoxButton.OK,
@@ -261,69 +256,69 @@ namespace HsPvSerAPG.Vista.Reenviar.Anticipo
                     }
 
                     int cia = sisVariables.GCia;
-                        int tipcob = 9;
-                        int codsuc = sisVariables.GCodSuc;
-                        int tipdoc = 41;
+                    int tipcob = 9;
+                    int codsuc = sisVariables.GCodSuc;
+                    int tipdoc = 41;
                     string fecha = DateTime.Now.ToString("yyyyMMdd");
 
-                        using (var cliente = new HttpClient())
+                    using (var cliente = new HttpClient())
+                    {
+                        try
                         {
-                            try
-                            {
 
-                                string apiUrl = $"{sisVariables.GAPI}consultaImpPagare" +
-                                                $"?cia={cia}&tipcob={tipcob}&codsuc={codsuc}&fecha={fecha}&correl={correl}&tipdoc={tipdoc}&numdoc={tabFac.Numdoc}";
-                            
+                            string apiUrl = $"{sisVariables.GAPI}consultaImpPagare" +
+                                            $"?cia={cia}&tipcob={tipcob}&codsuc={codsuc}&fecha={fecha}&correl={correl}&tipdoc={tipdoc}&numdoc={tabFac.Numdoc}";
+
 
                             var response = await cliente.GetAsync(apiUrl);
 
-                                if (!response.IsSuccessStatusCode)
-                                {
-                                    System.Windows.MessageBox.Show($"Error al generar comprobante ({response.StatusCode})", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                    return;
-                                }
-
-                                string jsonResponse = await response.Content.ReadAsStringAsync();
-
-                                var doc = System.Text.Json.JsonDocument.Parse(jsonResponse);
-                                var root = doc.RootElement;
-
-                                if (!root.TryGetProperty("pdf_link", out var pdfLinkElement))
-                                {
-                                    System.Windows.MessageBox.Show("No se encontró el link del comprobante en la respuesta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                                    return;
-                                }
-
-                                string pdfURL = pdfLinkElement.GetString();
-
-                                var pdfBytes = await cliente.GetByteArrayAsync(pdfURL);
-                                string fileName = System.IO.Path.GetFileName(pdfURL);
-                                string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), fileName);
-                                System.IO.File.WriteAllBytes(tempFilePath, pdfBytes);
-
-                                ImprimirPDFDirecto(tempFilePath);
-                                System.IO.File.Delete(tempFilePath);
-                            }
-                            catch (Exception ex)
+                            if (!response.IsSuccessStatusCode)
                             {
-                                System.Windows.MessageBox.Show($"Error al generar o imprimir comprobante: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                System.Windows.MessageBox.Show($"Error al generar comprobante ({response.StatusCode})", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
                             }
-                        }
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo aplicar el anticipo. \n{message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    //var anticipo = TabFacanticiposcontroller.aplicarAnticipo(anticipo_request);
 
-                    TBTipCam.Text = sisVariables.Gtipcam.ToString("F6");
+                            string jsonResponse = await response.Content.ReadAsStringAsync();
+
+                            var doc = System.Text.Json.JsonDocument.Parse(jsonResponse);
+                            var root = doc.RootElement;
+
+                            if (!root.TryGetProperty("pdf_link", out var pdfLinkElement))
+                            {
+                                System.Windows.MessageBox.Show("No se encontró el link del comprobante en la respuesta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
+
+                            string pdfURL = pdfLinkElement.GetString();
+
+                            var pdfBytes = await cliente.GetByteArrayAsync(pdfURL);
+                            string fileName = System.IO.Path.GetFileName(pdfURL);
+                            string tempFilePath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), fileName);
+                            System.IO.File.WriteAllBytes(tempFilePath, pdfBytes);
+
+                            ImprimirPDFDirecto(tempFilePath);
+                            System.IO.File.Delete(tempFilePath);
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Windows.MessageBox.Show($"Error al generar o imprimir comprobante: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    this.Close();
                 }
                 else
-                    MessageBox.Show("Ingrese primero un anticipo", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                {
+                    MessageBox.Show("No se pudo aplicar el anticipo. \n{message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                //var anticipo = TabFacanticiposcontroller.aplicarAnticipo(anticipo_request);
 
+                TBTipCam.Text = sisVariables.Gtipcam.ToString("F6");
             }
-        
+            else
+                MessageBox.Show("Ingrese primero un anticipo", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+        }
+
 
         private void TBTipCam_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
